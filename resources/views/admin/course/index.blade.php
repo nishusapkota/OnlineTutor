@@ -41,7 +41,7 @@
                     <tr>
                         <th>{{$course->id}}</th>
                         <th>{{$course->course}}</th>
-                        <th>{{$course->users->id}}</th>
+                        <th>{{$course->user->name}}</th>
                         <th>{{$course->faculty->name}}</th>
                         <th>{{$course->semester->sem}}</th>
                         <th>

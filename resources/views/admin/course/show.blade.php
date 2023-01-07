@@ -24,7 +24,7 @@
                 </tr>
                 <tr>
                     <th>Tutor Name</th>
-                    <td>{{$course->users->name}}</td>
+                    <td>{{$course->user->name}}</td>
                 </tr>
                 <tr>
                     <th>Faculty</th>

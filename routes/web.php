@@ -53,14 +53,20 @@ Route::prefix('/administrator')->middleware('auth','isAdmin')->name('admin.')->g
 });
 
 //Teacher Part
+Route::prefix('/tutor')->middleware('auth','isTeacher')->name('tutor.')->group(function(){
+    Route::get('/',[\App\Http\Controllers\HomeController::class, 'tutorhomepage'])->name('homepage');
 
+});
 
 
 
 
 
 //Student Part
+Route::prefix('/student')->middleware('auth','isStudent')->name('student.')->group(function(){
+    Route::get('/',[\App\Http\Controllers\HomeController::class, 'studenthomepage'])->name('homepage');
 
+});
 
 
 

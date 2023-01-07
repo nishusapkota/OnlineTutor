@@ -29,8 +29,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Course Teach</th>
-                        <th>Semester</th>
+                        
                         <th>Action</th>
                     </tr>
 
@@ -40,8 +39,7 @@
                     <tr>
                         <th>{{$user->id}}</th>
                         <th>{{$user->name}}</th>
-                        <th>{{$user->courses->course}}</th>
-                        <th>{{$user->courses->semester->sem}}</th>
+                        
                         <th>
                             
                         <a class="btn btn-secondary" href="{{route('admin.instructor.show',$user)}}"><i class="fas fa-eye"></i>Show</a>

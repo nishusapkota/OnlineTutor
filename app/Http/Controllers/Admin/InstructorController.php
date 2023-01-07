@@ -42,6 +42,7 @@ class InstructorController extends Controller
             'name'=>['required'],
             'email'=>['required','unique:users,email'],
             'password'=>['required',Password::min(6)->letters()->numbers()],
+        
             'role'=>['required',Rule::in($this->roles)],
 
         ]);

@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Course extends Model
 {
     use HasFactory;
-    function users(){
-        return $this->hasMany('\App\Models\User');
+    function user(){
+        return $this->belongsTo('\App\Models\User');
     }
     function semester(){
         return $this->belongsTo('\App\Models\Semester');
