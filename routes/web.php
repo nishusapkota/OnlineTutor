@@ -8,7 +8,7 @@ use App\Http\Controllers\Admin\FacultyController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\InstructorController;
 use App\Http\Controllers\HomeController;
-
+use App\Http\Controllers\TutorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,7 +30,8 @@ Route::get('/home',[\App\Http\Controllers\HomeController::class,'home'])->middle
 
 
 //Admin Part
-Route::prefix('/administrator')->middleware('auth','isAdmin')->name('admin.')->group(function(){
+//->middleware('auth','isAdmin')
+Route::prefix('/administrator')->name('admin.')->group(function(){
     Route::get('/',[\App\Http\Controllers\Admin\AdminController::class, 'index'])->name('index');
     //crud
     Route::resource('faculties',\App\Http\Controllers\Admin\FacultyController::class); 
@@ -53,8 +54,10 @@ Route::prefix('/administrator')->middleware('auth','isAdmin')->name('admin.')->g
 });
 
 //Teacher Part
-Route::prefix('/tutor')->middleware('auth','isTeacher')->name('tutor.')->group(function(){
+//->middleware('auth','isTeacher')
+Route::prefix('/tutor')->name('tutor.')->group(function(){
     Route::get('/',[\App\Http\Controllers\HomeController::class, 'tutorhomepage'])->name('homepage');
+    Route::get('/course/{id}',[\App\Http\Controllers\TutorController::class,'dashboardshow'])->name('course');
 
 });
 

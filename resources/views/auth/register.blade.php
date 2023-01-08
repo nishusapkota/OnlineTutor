@@ -32,18 +32,18 @@
                     <input type="email" id="email" class="form-control" name="email" required>
                 </div>
                 <div class="form-group">
-                    <label for="faculty">Faculty</label>
-                    <select name="faculty" class="form-control" required>
+                    <label for="faculty_id">Faculty</label>
+                    <select name="faculty_id" class="form-control" required>
                         <option selected>Choose faculty</option>
-                        <option value="bsccsit">BSCCSIT</option>
-                        <option value="bca">BCA</option>
-                        <option value="bim">BIM</option>
+                        <option value="1">BSCCSIT</option>
+                        <option value="2">BCA</option>
+                        <option value="3">BIM</option>
 
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="semester">Semester</label>
-                    <select name="semester" class="form-control" required>
+                    <label for="semester_id">Semester</label>
+                    <select name="semester_id" class="form-control" required>
                         <option selected>Choose semester</option>
                         <option value="1">First</option>
                         <option value="2">Second</option>

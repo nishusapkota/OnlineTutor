@@ -22,24 +22,24 @@ class UserSeeder extends Seeder
         User::create([
             'name'=>'neetu',
             'email'=>'neetuspkt@gmail.com',
-            'faculty'=>'BscCsit',
-            'semester'=>'seventh',
+            'faculty_id'=>'1',
+            'semester_id'=>'7',
             'password'=>bcrypt('neetu123'), 
             'role'=>'student',
         ]);
         User::create([
             'name'=>'thani',
             'email'=>'thani@gmail.com',
-            'faculty'=>'BCA',
-            'semester'=>'seventh',
+            'faculty_id'=>'2',
+            'semester_id'=>'7',
             'password'=>bcrypt('thani123'), 
             'role'=>'student',
         ]);
         User::create([
             'name'=>'roshan',
             'email'=>'roshan@gmail.com',
-            'faculty'=>'BIM',
-            'semester'=>'seventh',
+            'faculty_id'=>'3',
+            'semester_id'=>'7',
             'password'=>bcrypt('roshan123'), 
             'role'=>'student',
         ]);

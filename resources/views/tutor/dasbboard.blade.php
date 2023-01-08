@@ -56,6 +56,8 @@
       margin-left: 20px;
       text-align: center;
     }
+
+    
   </style>
 </head>
 
@@ -68,7 +70,7 @@
       <div class="col-md-12">
         <nav class="navbar navbar-md">
           <a class="navbar-brand" href="#">
-            <img src="images/logo.png" width="30" height="30" class="d-inline-block align-top" alt=""><span class="pl-2 mt-2">Online Tutor</span>
+            <img src="/images/logo.png" width="30" height="30" class="d-inline-block align-top" alt=""><span class="pl-2 mt-2">Online Tutor</span>
           </a>
           <ul class="nav">
             <li class="nav-item">
@@ -84,34 +86,29 @@
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-3">
-        <div class="card" id="welcome">
-          <div class="card-body">
-            <h5>Welcome ,{{ auth()->user()->name }}!!</h5>
-          </div>
-
+    <div class="container bg-success mt-5">
+        <div class="row bg-secondary">
+        <h6 class="text-center"><i class="fa fa-book" aria-hidden="true"></i>{{$course->course}}</h6></br>
+        <p>Semester: {{$course->semester->sem}}</p>
+        <p>Faculty: {{$course->faculty->name}}</p>
+        
+        
         </div>
-      </div>
-    </div>
-
-
-
-
-    <div class="row m-5">
-      <div class="card-deck ">
-      @foreach($courses as $course)
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">{{$course->course}}</h5>
-            <p class="card-text">Faculty: {{$course->faculty->name}}</p>
-            <p class="card-text">Semester: {{$course->semester->sem}}</p>
-            <a href='/tutor/course/{id}' class="btn btn-secondary">View</a>
-          </div>
+        <div class="row bg-danger mt-3">
+            <div class="col-3 bg-light">
+              <h5>Instructor: </h5><p>{{$course->user->name}}</p>
+              <h5>Class Members: </h5><p>gj</p>
+            </div>
+            <div class="col-9 bg-warning">Faculty: {{$course->faculty->name}}</div>
         </div>
-    @endforeach
-      </div>
+
     </div>
+    
+
+
+
+
+    
 
 
 
