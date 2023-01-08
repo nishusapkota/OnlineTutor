@@ -20,11 +20,27 @@ class UserSeeder extends Seeder
     public function run()
     {
         User::create([
-            'name'=>'neetu',
-            'email'=>'neetuspkt@gmail.com',
+            'name'=>'nishu',
+            'email'=>'nishu@gmail.com',
             'faculty_id'=>'1',
             'semester_id'=>'7',
-            'password'=>bcrypt('neetu123'), 
+            'password'=>bcrypt('nishu123'), 
+            'role'=>'student',
+        ]);
+        User::create([
+            'name'=>'lanisha',
+            'email'=>'lanisha@gmail.com',
+            'faculty_id'=>'1',
+            'semester_id'=>'7',
+            'password'=>bcrypt('lanisha123'), 
+            'role'=>'student',
+        ]);
+        User::create([
+            'name'=>'rachana',
+            'email'=>'rachana@gmail.com',
+            'faculty_id'=>'1',
+            'semester_id'=>'7',
+            'password'=>bcrypt('rachana123'), 
             'role'=>'student',
         ]);
         User::create([
@@ -67,6 +83,32 @@ class UserSeeder extends Seeder
             'email'=>'macharya@gmail.com',
             'password'=>bcrypt('macharya123'),
             'role'=>'teacher',
+        ]);
+        User::create([
+            'name'=>'Nabin Thapa',
+            'email'=>'nthyapa@gmail.com',
+            'password'=>bcrypt('nabin123'),
+            'role'=>'teacher',
+        ]);
+        User::create([
+            'name'=>'Nischal Khatiwada',
+            'email'=>'nischal@gmail.com',
+            'password'=>bcrypt('nischal123'),
+            'role'=>'teacher',
+        ]);
+        User::create([
+            'name'=>'Arjun Saud',
+            'email'=>'arjun@gmail.com',
+            'password'=>bcrypt('arjun123'),
+            'role'=>'teacher',
+        ]);
+        User::create([
+            'name'=>'Neetu',
+            'email'=>'neetuspkt@gmail.com',
+            'faculty_id'=>'1',
+            'semester_id'=>'7',
+            'password'=>bcrypt('neetu123'), 
+            'role'=>'student',
         ]);
     }
 }

@@ -57,7 +57,7 @@ Route::prefix('/administrator')->name('admin.')->group(function(){
 //->middleware('auth','isTeacher')
 Route::prefix('/tutor')->name('tutor.')->group(function(){
     Route::get('/',[\App\Http\Controllers\HomeController::class, 'tutorhomepage'])->name('homepage');
-    Route::get('/course/{id}',[\App\Http\Controllers\TutorController::class,'dashboardshow'])->name('course');
+    Route::get('/course/{course}',[\App\Http\Controllers\TutorController::class,'dashboardshow'])->name('course');
 
 });
 

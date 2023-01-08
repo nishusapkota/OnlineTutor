@@ -106,7 +106,7 @@
             <h5 class="card-title">{{$course->course}}</h5>
             <p class="card-text">Faculty: {{$course->faculty->name}}</p>
             <p class="card-text">Semester: {{$course->semester->sem}}</p>
-            <a href='/tutor/course/{id}' class="btn btn-secondary">View</a>
+            <a href="{{route('tutor.course',$course)}}" class="btn btn-secondary">View</a>
           </div>
         </div>
     @endforeach

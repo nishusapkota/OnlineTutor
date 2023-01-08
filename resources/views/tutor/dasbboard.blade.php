@@ -48,15 +48,6 @@
       font-size: 20px;
     }
 
-    #welcome {
-      background: url('images/gray.jpg');
-      color: #fec913;
-      border-radius: 25px;
-      margin-top: 10px;
-      margin-left: 20px;
-      text-align: center;
-    }
-
     
   </style>
 </head>
@@ -87,33 +78,40 @@
     </div>
 
     <div class="container bg-success mt-5">
-        <div class="row bg-secondary">
-        <h6 class="text-center"><i class="fa fa-book" aria-hidden="true"></i>{{$course->course}}</h6></br>
-        <p>Semester: {{$course->semester->sem}}</p>
-        <p>Faculty: {{$course->faculty->name}}</p>
-        
-        
+      <div class="row bg-light mb-5">
+        <h6 class="text-center"><i class="fa fa-book"></i>{{$course->course}}</h6>
+        <p class="text-left">Semester: {{$course->semester->sem}}</p> <br>
+        <p class="text-left">Faculty: {{$course->faculty->name}}</p>
+      </div>
+      <div class="row mb-5">
+        <div class="col-3 bg-light mr-3">
+          <h5>Instructor: </h5>
+          <p>{{$course->user->name}}</p>
+          <h5>Class Members: </h5>
+          <p>
+            @foreach($users as $user)
+            &#x2022;{{$user->name}}<br>
+            @endforeach
+          </p>
         </div>
-        <div class="row bg-danger mt-3">
-            <div class="col-3 bg-light">
-              <h5>Instructor: </h5><p>{{$course->user->name}}</p>
-              <h5>Class Members: </h5><p>gj</p>
-            </div>
-            <div class="col-9 bg-warning">Faculty: {{$course->faculty->name}}</div>
-        </div>
+        <div class="col-6 bg-light">Posts</div>
+      </div>
 
     </div>
-    
 
 
 
 
-    
+
+
 
 
 
 
   </div>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 
