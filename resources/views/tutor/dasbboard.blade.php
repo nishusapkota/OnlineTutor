@@ -44,17 +44,32 @@
     }
 
     .banner .nav li a {
+     
       color: #e8c784;
       font-size: 20px;
     }
 
-    
+    #hyperlink {
+      margin-right: 100px;
+      text-align: right;
+    }
+
+    #hyperlink1 a {
+      margin-left: 20px;
+      color: gray;
+      text-decoration: none;
+    }
+    #hyperlink1 a:hover {
+     
+      color: black;
+      text-decoration:none;
+    }
   </style>
 </head>
 
 <body>
-  <div class="cotainer-fluid banner">
-    <div class="row" style="background:gray;background-position: top;
+<div class="cotainer-fluid banner">
+    <div class="row mb-3" style="background:gray;background-position: top;
       background-size: cover;
       background-repeat: no-repeat;
       background-attachment: fixed;">
@@ -77,14 +92,34 @@
       </div>
     </div>
 
-    <div class="container bg-success mt-5">
-      <div class="row bg-light mb-5">
-        <h6 class="text-center"><i class="fa fa-book"></i>{{$course->course}}</h6>
-        <p class="text-left">Semester: {{$course->semester->sem}}</p> <br>
-        <p class="text-left">Faculty: {{$course->faculty->name}}</p>
+    <div class="container bg-light mt-5 py-3">
+      <div class="row mx-auto">
+      <div class="card mx-auto" style="width:100%;">
+          <div class="card-body">
+            <h5 class="text-center"><i class="fa fa-book"></i>{{$course->course}}</h5>
+            <p class="text-left"><b>Semester:</b>{{$course->semester->sem}}</p>
+            <p class="text-left"><b>Faculty:</b>{{$course->faculty->name}}</p>
+            <div class="row ml-5 mb-2">
+            <div class="col-6"></div>
+            <div class="col d-flex flex-row" id="hyperlink1">
+              <a href="{{route('tutor.course',$course)}}"><i class="fa fa-pencil-square" aria-hidden="true"></i>
+                Assignment</a>
+              <a href="{{route('tutor.note_create',$course)}}"><i class="fa fa-book" aria-hidden="true"></i>
+                Notes</a>
+              
+              <a href=""><i class="fa fa-plus" aria-hidden="true"></i>Notices
+              </a>
+              <a href=""><i class="fa fa-comments" aria-hidden="true"></i> chat</a>
+            </div>
+          </div>
+          </div>
+          
+        </div>
       </div>
-      <div class="row mb-5">
-        <div class="col-3 bg-light mr-3">
+      <div class="row mx-auto mt-3">
+        <div class="col-3 bg-light">
+        <div class="card">
+          <div class="card-body" style="box-shadow: 0px 2px 18px 0px rgba(0,0,0,0.2);">
           <h5>Instructor: </h5>
           <p>{{$course->user->name}}</p>
           <h5>Class Members: </h5>
@@ -93,10 +128,26 @@
             &#x2022;{{$user->name}}<br>
             @endforeach
           </p>
+          </div>
         </div>
-        <div class="col-6 bg-light">Posts</div>
+        
+        </div>
+        <div class="col-8 bg-light">
+        <div class="card">
+          <div class="card-body"  style="box-shadow: 0px 2px 18px 0px rgba(0,0,0,0.2);">
+          <form action="{{route('tutor.assignment.upload',$course)}}" method="POST">
+              @csrf
+              @if($errors->any())
+              <div class="alert alert-danger">{{$errors->first()}}</div>
+              @endif
+              <textarea class="form-control" id="assignment" name="assignment" rows="3"></textarea>
+              <button type="submit" name="submit" class="btn btn-secondary my-1">Upload</button>
+            </form>
+          </div>
+            
+          </div>
+        </div>
       </div>
-
     </div>
 
 
@@ -104,11 +155,31 @@
 
 
 
+</div>
+  <script src="{{asset('ckeditor/ckeditor.js')}}"></script>
+  <script>
+    ClassicEditor
+      .create(document.querySelector('#assignment'), {
+
+        licenseKey: '',
+
+
+
+      })
+      .then(editor => {
+        window.editor = editor;
 
 
 
 
-  </div>
+      })
+      .catch(error => {
+        console.error('Oops, something went wrong!');
+        console.error('Please, report the following error on https://github.com/ckeditor/ckeditor5/issues with the build id and the error stack trace:');
+        console.warn('Build id: ympsfd2pd8k0-o86wbtxp1mvj');
+        console.error(error);
+      });
+  </script>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 

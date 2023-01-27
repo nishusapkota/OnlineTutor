@@ -20,15 +20,15 @@ class UserSeeder extends Seeder
     public function run()
     {
         User::create([
-            'name'=>'nishu',
-            'email'=>'nishu@gmail.com',
+            'name'=>'Heera',
+            'email'=>'heera@gmail.com',
             'faculty_id'=>'1',
             'semester_id'=>'7',
-            'password'=>bcrypt('nishu123'), 
+            'password'=>bcrypt('heera123'), 
             'role'=>'student',
         ]);
         User::create([
-            'name'=>'lanisha',
+            'name'=>'Lanisha',
             'email'=>'lanisha@gmail.com',
             'faculty_id'=>'1',
             'semester_id'=>'7',
@@ -36,7 +36,7 @@ class UserSeeder extends Seeder
             'role'=>'student',
         ]);
         User::create([
-            'name'=>'rachana',
+            'name'=>'Rachana',
             'email'=>'rachana@gmail.com',
             'faculty_id'=>'1',
             'semester_id'=>'7',
@@ -44,7 +44,7 @@ class UserSeeder extends Seeder
             'role'=>'student',
         ]);
         User::create([
-            'name'=>'thani',
+            'name'=>'Thani',
             'email'=>'thani@gmail.com',
             'faculty_id'=>'2',
             'semester_id'=>'7',
@@ -52,7 +52,7 @@ class UserSeeder extends Seeder
             'role'=>'student',
         ]);
         User::create([
-            'name'=>'roshan',
+            'name'=>'Roshan',
             'email'=>'roshan@gmail.com',
             'faculty_id'=>'3',
             'semester_id'=>'7',
@@ -60,26 +60,26 @@ class UserSeeder extends Seeder
             'role'=>'student',
         ]);
         User::create([
-            'name'=>'admin',
+            'name'=>'Admin',
             'email'=>'admin@gmail.com',
             'password'=>bcrypt('admin123'),
             'role'=>'admin',
         ]);
 
         User::create([
-            'name'=>'teacher',
+            'name'=>'Teacher',
             'email'=>'teacher@gmail.com',
             'password'=>bcrypt('teacher123'),
             'role'=>'teacher',
         ]);
         User::create([
-            'name'=>'prakash sharma',
+            'name'=>'Prakash Sharma',
             'email'=>'psharma@gmail.com',
             'password'=>bcrypt('psharma123'),
             'role'=>'teacher',
         ]);
         User::create([
-            'name'=>'modnath acharya',
+            'name'=>'Modnath Acharya',
             'email'=>'macharya@gmail.com',
             'password'=>bcrypt('macharya123'),
             'role'=>'teacher',

@@ -36,12 +36,12 @@
                 <tbody>
                     @foreach ($users as $user )
                     <tr>
-                        <th>{{$user->id}}</th>
-                        <th>{{$user->name}}</th>
-                        <th>{{$user->semester_}}</th>
-                        <th>{{$user->faculty}}</th>
+                        <td>{{$user->id}}</td>
+                        <td>{{$user->name}}</td>
+                        <td>{{$user->semester->sem}}</td>
+                        <td>{{$user->faculty->name}}</td>
 
-                        <th>
+                        <td>
                         <a class="btn btn-secondary" href="{{route('admin.students.show',$user)}}"><i class="fas fa-eye"></i>Show</a>
                                 <a class="btn btn-warning" href="{{route('admin.students.edit',$user)}}"><i class="fas fa-edit"></i>Edit</a>
                                 <form class="d-inline" onclick="return confirm('Are you sure to delete this?')" action="{{route('admin.students.destroy',$user)}}" method="post">
@@ -50,7 +50,7 @@
                                     <button class="btn btn-danger">
                                         <i class="fas fa-trash"></i>Delete</button>
                                     </form>
-                        </th>
+                        </td>
                         
                     </tr>
                         

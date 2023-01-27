@@ -37,10 +37,10 @@
                 <tbody>
                     @foreach ($users as $user )
                     <tr>
-                        <th>{{$user->id}}</th>
-                        <th>{{$user->name}}</th>
+                        <td>{{$user->id}}</td>
+                        <td>{{$user->name}}</td>
                         
-                        <th>
+                        <td>
                             
                         <a class="btn btn-secondary" href="{{route('admin.instructor.show',$user)}}"><i class="fas fa-eye"></i>Show</a>
                                 <a class="btn btn-warning" href="{{route('admin.instructor.edit',$user)}}"><i class="fas fa-edit"></i>Edit</a>
@@ -51,7 +51,7 @@
                                         <i class="fas fa-trash"></i>Delete</button>
                                     </form>
                     
-                        </th>
+                        </td>
                     </tr>
                         
                     @endforeach

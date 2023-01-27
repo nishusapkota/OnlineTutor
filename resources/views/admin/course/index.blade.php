@@ -39,12 +39,12 @@
                 <tbody>
                 @foreach ($courses as $course )
                     <tr>
-                        <th>{{$course->id}}</th>
-                        <th>{{$course->course}}</th>
-                        <th>{{$course->user->name}}</th>
-                        <th>{{$course->faculty->name}}</th>
-                        <th>{{$course->semester->sem}}</th>
-                        <th>
+                        <td>{{$course->id}}</td>
+                        <td>{{$course->course}}</td>
+                        <td>{{$course->user->name}}</td>
+                        <td>{{$course->faculty->name}}</td>
+                        <td>{{$course->semester->sem}}</td>
+                        <td>
                             
                         <a class="btn btn-secondary" href="{{route('admin.course.show',$course)}}"><i class="fas fa-eye"></i>Show</a>
                                 <a class="btn btn-warning" href="{{route('admin.course.edit',$course)}}"><i class="fas fa-edit"></i>Edit</a>
@@ -55,7 +55,7 @@
                                         <i class="fas fa-trash"></i>Delete</button>
                                     </form>
                     
-                        </th>
+                        </td>
                     </tr>
                         
                     @endforeach

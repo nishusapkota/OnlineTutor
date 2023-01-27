@@ -108,7 +108,7 @@
             <p class="card-text">Semester: {{$course->semester->sem}}</p>
             <p class="card-text">Tutor: {{$course->user->name}}</p>
 
-            <a href="{{route('tutor.course',$course)}}" class="btn btn-secondary">View</a>
+            <a href="{{route('student.course',$course)}}" class="btn btn-secondary">View</a>
           </div>
         </div>
     @endforeach

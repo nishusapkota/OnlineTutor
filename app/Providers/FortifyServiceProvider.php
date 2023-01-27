@@ -49,7 +49,8 @@ class FortifyServiceProvider extends ServiceProvider
             return view('auth.login');
         });
         Fortify::registerView(function () {
-            return view('auth.register');
+            $faculties=\App\Models\Faculty::all();
+            return view('auth.register',compact('faculties'));
         });
     }
 }

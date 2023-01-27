@@ -11,5 +11,8 @@ class Faculty extends Model
     function courses(){
         return $this->hasMany('\App\Models\Course');
     }
+    function users(){
+        return $this->hasMany('\App\Models\User');
+    }
     protected $fillable=['name'];
 }

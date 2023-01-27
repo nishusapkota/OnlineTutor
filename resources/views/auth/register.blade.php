@@ -35,9 +35,9 @@
                     <label for="faculty_id">Faculty</label>
                     <select name="faculty_id" class="form-control" required>
                         <option selected>Choose faculty</option>
-                        <option value="1">BSCCSIT</option>
-                        <option value="2">BCA</option>
-                        <option value="3">BIM</option>
+                        @foreach ($faculties as $faculty )
+                        <option value="faculty_id">{{$faculty->name}}</option>
+                        @endforeach
 
                     </select>
                 </div>

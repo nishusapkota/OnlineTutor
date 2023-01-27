@@ -4,6 +4,8 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Course;
+use App\Models\Faculty;
+use App\Models\Semester;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,6 +16,12 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
     function courses(){
         return $this->hasMany('\App\Models\Course');
+    }
+    function semester(){
+        return $this->belongsTo('\App\Models\Semester');
+    }
+    function faculty(){
+        return $this->belongsTo('\App\Models\Faculty');
     }
 
     /**

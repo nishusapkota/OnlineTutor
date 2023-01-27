@@ -62,23 +62,13 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <div class="d-flex ml-auto flex-column flex-lg-row align-items-center">
                             <ul class="navbar-nav  ">
-                                <li class="nav-item active">
-                                    <a class="nav-link active" href="index.html"> Home <span class="sr-only">(current)</span></a>
-                                </li>
-                                <li class="nav-item ">
-                                    <a class="nav-link" href=""> BSC CSIt</a>
-                                </li>
+                                
 
-                                <li class="nav-item ">
-                                    <a class="nav-link" href=""> BCA </a>
-                                </li>
+                               
 
 
 
-                                <li class="nav-item">
-                                    <a class="nav-link" href="">BIM</a>
-                                </li>
-
+                                
                                 <li class="nav-item ">
                                     @if (Route::has('login'))
 
@@ -98,7 +88,10 @@
 
 
                                 @else
-                                <li> <a href="{{ route('login') }}" class="nav-link">Log in</a></li>
+                                <li> <a href="{{ route('login') }}" class="nav-link">Admin Login</a></li>
+                                <li> <a href="{{ route('login') }}" class="nav-link">Teacher Login</a></li>
+                                <li> <a href="{{ route('login') }}" class="nav-link">Student Login</a></li>
+
 
                                 @if (Route::has('register'))
                                 <li><a href="{{ route('register') }}" class="nav-link">Register</a></li>
