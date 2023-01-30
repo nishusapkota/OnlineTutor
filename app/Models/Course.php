@@ -20,5 +20,8 @@ class Course extends Model
     function assignments(){
         return $this->hasMany('\App\Models\Assignment');
     }
+    function notes(){
+        return $this->hasMany('\App\Models\Note');
+    }
     protected $fillable=['course','user_id','faculty_id','semester_id'];
 }

@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -36,22 +35,21 @@ class InstructorController extends Controller
      */
     public function store(Request $request)
     {
-        
-
         $request->validate([
             'name'=>['required'],
             'email'=>['required','unique:users,email'],
             'password'=>['required',Password::min(6)->letters()->numbers()],
-        
             'role'=>['required',Rule::in($this->roles)],
-
         ]);
-        User::create([
+        $user=User::create([
             'name'=>$request->name,
             'email'=>$request->email,
             'password'=>bcrypt($request->password),
             'role'=>$request->role,
         ]);
+       
+        
+        
         return redirect()->route('admin.instructor.index')->with('success','Instructor added successfully');
 
     }

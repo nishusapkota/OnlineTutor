@@ -1,11 +1,26 @@
 @extends('tutor.layout')
 @section('content')
 <h5>Add Notes</h5>
-
-<form action="" method="" enctype="multipart/form-data">
+<br>
+<form action="{{route('tutor.note_store',$course)}}" method="post" enctype="multipart/form-data">
+@if($errors->any())
+            <div class="alert alert-danger">{{$errors->first()}}</div>
+            @endif
+@if(session('success'))
+              <div class="alert alert-success">
+                <button class="close" data-dismiss="alert">X</button>
+                {{session('success')}}
+              </div>
+@endif
+            @csrf
 <div class="form-group">
     <label for="title">Enter Title</label>
-    <input type="text" class="form-control" id="title" name="title">
+    <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title">
+    @error('title')
+      <span class="invalid-feedback" role="alert">
+       <strong>{{$message}}</strong> 
+      </span>
+    @enderror
   </div>
   <div class="form-group">
     <label for="chapter">Enter Chapter Number</label>

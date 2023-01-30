@@ -60,6 +60,9 @@ Route::prefix('/tutor')->name('tutor.')->group(function(){
     Route::get('/course/{course}',[\App\Http\Controllers\TutorController::class,'dashboardshow'])->name('course');
     Route::post('/assignment/{course}',[TutorController::class,'upload_assignment'])->name('assignment.upload');
     Route::get('/note/create/{course}',[\App\Http\Controllers\TutorController::class,'create_note'])->name('note_create');
+    Route::post('/note/create/{course}',[\App\Http\Controllers\TutorController::class,'store_note'])->name('note_store');
+
+    
 });
 
 
