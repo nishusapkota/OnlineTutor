@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('assignments', function (Blueprint $table) {
             $table->id();
             $table->text('assignment');
+            $table->dateTime('due_date');
             $table->foreignId('course_id');
             $table->timestamps();
         });

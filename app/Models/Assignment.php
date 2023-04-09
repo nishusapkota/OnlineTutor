@@ -16,5 +16,5 @@ class Assignment extends Model
     {
         return $this->hasMany('\App\Models\StudentAssignment');
     }
-    protected $fillable=['assignment','course_id'];
+    protected $fillable=['assignment','due_date','course_id'];
 }

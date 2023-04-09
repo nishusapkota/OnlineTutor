@@ -102,12 +102,12 @@
             <div class="row ml-5 mb-2">
             <div class="col-6"></div>
             <div class="col d-flex flex-row" id="hyperlink1">
-              <a href="{{route('tutor.course',$course)}}"><i class="fa fa-pencil-square" aria-hidden="true"></i>
+              <a href="{{route('tutor.assignment.index',$course)}}"><i class="fa fa-pencil-square" aria-hidden="true"></i>
                 Assignment</a>
               <a href="{{route('tutor.note_create',$course)}}"><i class="fa fa-book" aria-hidden="true"></i>
                 Notes</a>
               
-              <a href=""><i class="fa fa-plus" aria-hidden="true"></i>Notices
+              <a href="{{route('tutor.create_notice',$course)}}"><i class="fa fa-plus" aria-hidden="true"></i>Notices
               </a>
               <a href=""><i class="fa fa-comments" aria-hidden="true"></i> chat</a>
             </div>
@@ -119,7 +119,7 @@
       <div class="row mx-auto mt-3">
         <div class="col-12 bg-light">
         <div class="card">
-          <div class="card-body" style="box-shadow: 0px 2px 18px 0px rgba(0,0,0,0.2);">
+          <div class="card-body" style="box-shadow: 0px 2px 18px 0px rgba(0,0,0,0.2);max-height:280px; overflow-y:scroll">
           
           @yield('content')
           </div>

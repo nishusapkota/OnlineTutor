@@ -54,13 +54,18 @@ Route::prefix('/administrator')->name('admin.')->group(function(){
 });
 
 //Teacher Part
-//->middleware('auth','isTeacher')
+//->middleware('auth','IsTeacher')
 Route::prefix('/tutor')->name('tutor.')->group(function(){
     Route::get('/',[\App\Http\Controllers\HomeController::class, 'tutorhomepage'])->name('homepage');
-    Route::get('/course/{course}',[\App\Http\Controllers\TutorController::class,'dashboardshow'])->name('course');
-    Route::post('/assignment/{course}',[TutorController::class,'upload_assignment'])->name('assignment.upload');
+    Route::get('course/{course}',[\App\Http\Controllers\TutorController::class,'dashboardshow'])->name('course');
+    Route::post('/assignment/{course}',[\App\Http\Controllers\TutorController::class,'upload_assignment'])->name('assignment.upload');
+    Route::get('/assignment/{course}',[\App\Http\Controllers\TutorController::class,'index'])->name('assignment.index');
+    Route::get('/uploaded_assignment/{assignment}',[\App\Http\Controllers\TutorController::class,'uploaded_assignment'])->name('uploaded_assignment');
+    Route::get('show_assignment/{assignment}',[\App\Http\Controllers\TutorController::class,'show_assignment'])->name('show_assignment');
+    Route::post('/remarks/{assignment}',[\App\Http\Controllers\TutorController::class,'remark'])->name('remarks');
     Route::get('/note/create/{course}',[\App\Http\Controllers\TutorController::class,'create_note'])->name('note_create');
     Route::post('/note/create/{course}',[\App\Http\Controllers\TutorController::class,'store_note'])->name('note_store');
+    Route::get('/notice/create/{course}',[\App\Http\Controllers\TutorController::class,'create_notice'])->name('create_notice');
 
     
 });

@@ -96,9 +96,9 @@
       <div class="row mx-auto">
       <div class="card mx-auto" style="width:100%;">
           <div class="card-body">
-            <h5 class="text-center"><i class="fa fa-book"></i>{{$course->course}}</h5>
-            <p class="text-left"><b>Semester:</b>{{$course->semester->sem}}</p>
-            <p class="text-left"><b>Faculty:</b>{{$course->faculty->name}}</p>
+            <h5 class="text-center"><i class="fa fa-book"></i>{{$name}}</h5>
+            <p class="text-left"><b>Semester:</b>{{$sem}}</p>
+            <p class="text-left"><b>Faculty:</b>{{$faculty}}</p>
             <div class="row ml-5 mb-2">
             <div class="col-6"></div>
             <div class="col d-flex flex-row" id="hyperlink1">
@@ -117,49 +117,53 @@
         </div>
       </div>
       <div class="row mx-auto mt-3">
-        <div class="col-3 bg-light">
+        <div class="col-12 bg-light">
         <div class="card">
-          <div class="card-body" style="box-shadow: 0px 2px 18px 0px rgba(0,0,0,0.2);">
-          <h5>Instructor: </h5>
-          <p>{{$course->user->name}}</p>
-          <h5>Class Members: </h5>
-          <p>
-            @foreach($users as $user)
-            &#x2022;{{$user->name}}<br>
+          <div class="card-body" style="box-shadow: 0px 2px 18px 0px rgba(0,0,0,0.2);max-height:280px; overflow-y:scroll">
+          <div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-6"> <h5>Student Assignments</h5></div>
+ </div>
+        </div>
+     </div>
+       
+    <div class="card-body">
+        <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Student Name</th>
+                <th>Submitted_At</th>
+                <th>Due_Date</th>
+                <th>Assignment</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($assignments as $assignment)
+            <tr>
+                <td>{{$assignment->id}}</td>
+                <td>{{$assignment->user->name}}</td>
+                <td>{{$assignment->created_at}}</td>
+                <td>{{$assignment->assignment->due_date}}</td>
+                <td><a href="{{route('tutor.show_assignment', $assignment->id)}}" class="btn btn-success">View</a></td>
+                
+            </tr>
             @endforeach
-          </p>
+            
+        </tbody>
+       
+        </table>
+      
+    </div>
+</div>
+          
           </div>
         </div>
         
         </div>
-        <div class="col-8 bg-light">
-        <div class="card">
-          <div class="card-body"  style="box-shadow: 0px 2px 18px 0px rgba(0,0,0,0.2);">
-          <form action="{{route('tutor.assignment.upload',$course)}}" method="POST">
-              @csrf
-
-              @if($errors->any())
-              <div class="alert alert-danger">{{$errors->first()}}</div>
-              @endif
-<div class="form-group">
-   <textarea class="form-control" id="assignment" name="assignment" rows="3"></textarea>
-  </div>
-             
-              <div class="form-group">
-    <label for="due_date">Due Date</label>
-    <input type="date" class="form-control @error('due_date') is-invalid @enderror" id="due_date" name="due_date">
-    @error('due_date')
-    <span class="invalid-feedback" role="alert">
-       <strong>{{$message}}</strong> 
-      </span>
-    @enderror
-  </div>
-              <button type="submit" name="submit" class="btn btn-secondary my-1">Upload</button>
-            </form>
-          </div>
-            
-          </div>
-        </div>
+        
       </div>
     </div>
 
@@ -172,14 +176,13 @@
   <script src="{{asset('ckeditor/ckeditor.js')}}"></script>
   <script>
     ClassicEditor
-      .create(document.querySelector('#assignment'), {
+      .create(document.querySelector(''), {
 
         licenseKey: '',
 
 
 
       })
-      
       .then(editor => {
         window.editor = editor;
 
@@ -193,8 +196,6 @@
         console.warn('Build id: ympsfd2pd8k0-o86wbtxp1mvj');
         console.error(error);
       });
-
-
   </script>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -203,3 +204,6 @@
 </body>
 
 </html>
+
+
+
