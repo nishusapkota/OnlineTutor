@@ -60,8 +60,8 @@ class UserSeeder extends Seeder
             'role'=>'student',
         ]);
         User::create([
-            'name'=>'Admin',
-            'email'=>'admin@gmail.com',
+            'name'=>'Nishu',
+            'email'=>'nisa_csit2075@lict.edu.np',
             'password'=>bcrypt('admin123'),
             'role'=>'admin',
         ]);
@@ -104,7 +104,7 @@ class UserSeeder extends Seeder
         ]);
         User::create([
             'name'=>'Neetu',
-            'email'=>'neetuspkt@gmail.com',
+            'email'=>'neetu@gmail.com',
             'faculty_id'=>'1',
             'semester_id'=>'7',
             'password'=>bcrypt('neetu123'), 

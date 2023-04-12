@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('notices', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('courses_id');
             $table->text('notice');
-            $table->string('created_by');
             $table->timestamps();
         });
     }

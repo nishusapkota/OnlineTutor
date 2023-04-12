@@ -23,5 +23,8 @@ class Course extends Model
     function notes(){
         return $this->hasMany('\App\Models\Note');
     }
+    function notices(){
+        return $this->hasMany('\App\Models\Notice');
+    }
     protected $fillable=['course','user_id','faculty_id','semester_id'];
 }

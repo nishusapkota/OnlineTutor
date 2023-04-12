@@ -8,5 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Notice extends Model
 {
     use HasFactory;
-    protected $fillable=['notice','created_by'];
+    function course(){
+        return $this->belongsTo('\App\Models\Course');
+    }
+    protected $fillable=['courses_id','notice'];
 }

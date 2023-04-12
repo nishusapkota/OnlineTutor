@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Note;
 use App\Models\User;
 use App\Models\Course;
+use App\Models\Notice;
 use App\Models\Faculty;
 use App\Models\Remarks;
 use App\Models\Semester;
@@ -131,7 +132,15 @@ public function remark(Request $request,StudentAssignment $assignment)
 {
   return view('tutor.notice_create',compact('course'));
 }
-
+public function upload_notice(Request $request,Course $course)
+{
+  
+  Notice::create([
+    'courses_id'=>$course->id,
+    'notice'=>$request->notice,
+  ]);
+  return redirect()->back()->with('success','Notice updated successfully.');
+}
 
 }
 

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 use App\Models\User;
+use App\Mail\NewUserMail;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rules\Password;
 
 class InstructorController extends Controller
@@ -35,12 +37,18 @@ class InstructorController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validatedData=$request->validate([
             'name'=>['required'],
             'email'=>['required','unique:users,email'],
             'password'=>['required',Password::min(6)->letters()->numbers()],
             'role'=>['required',Rule::in($this->roles)],
         ]);
+        $data = [
+            'email' => $validatedData['email'],
+            'password' => $validatedData['password']
+        ];
+        \Illuminate\Support\Facades\Mail::to($validatedData['email'])->send(new NewUserMail($data));
+
         $user=User::create([
             'name'=>$request->name,
             'email'=>$request->email,
@@ -48,9 +56,10 @@ class InstructorController extends Controller
             'role'=>$request->role,
         ]);
        
+        // Send an email to the new user
+
         
-        
-        return redirect()->route('admin.instructor.index')->with('success','Instructor added successfully');
+        return redirect()->route('admin.instructor.index')->with('success','Instructor added successfully and Mail sent');
 
     }
 

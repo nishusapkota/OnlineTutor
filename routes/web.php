@@ -66,7 +66,7 @@ Route::prefix('/tutor')->name('tutor.')->group(function(){
     Route::get('/note/create/{course}',[\App\Http\Controllers\TutorController::class,'create_note'])->name('note_create');
     Route::post('/note/create/{course}',[\App\Http\Controllers\TutorController::class,'store_note'])->name('note_store');
     Route::get('/notice/create/{course}',[\App\Http\Controllers\TutorController::class,'create_notice'])->name('create_notice');
-
+    Route::post('/notice/{course}',[\App\Http\Controllers\TutorController::class,'upload_notice'])->name('notice_upload');
     
 });
 
