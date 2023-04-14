@@ -28,11 +28,11 @@
                 </tr>
                 <tr>
                     <th>Semester</th>
-                    <td>{{$user->semester}}</td>
+                    <td>{{$user->semester->sem}}</td>
                 </tr>
                 <tr>
                     <th>Faculty</th>
-                    <td>{{$user->faculty}}</td>
+                    <td>{{$user->faculty->name}}</td>
                 </tr>
                 <tr>
                     <th>Created</th>

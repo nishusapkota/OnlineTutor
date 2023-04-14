@@ -26,13 +26,13 @@
     </div>
     <div class="form-group">
         <label for="semester">Semester</label>
-        <input type="text" name="semester" class="form-control" value="{{$user->semester}}">
+        <input type="text" name="semester" class="form-control" value="{{$user->semester->sem}}">
     </div>
     <div class="form-group">
         <label for="faculty">Faculty</label>
-        <input type="text" name="faculty" class="form-control" value="{{$user->name}}">
+        <input type="text" name="faculty" class="form-control" value="{{$user->faculty->name}}">
     </div>
-
+    
     <button class="btn btn-primary">Update</button>
 </form>
     </div>

@@ -41,6 +41,7 @@ class User extends Authenticatable
         'faculty_id',
         'role',
         
+        
     ];
 
     /**

@@ -1,22 +1,24 @@
+@extends('adminlte::page')
 
-<html>
-<head>
-    <title>Online Tutor/Register</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-</head>  
-<body>
-<div style="max-width: 550px; max-height:100%; margin:20px auto">
+@section('content')
+
+
     <div class="card">
         <div class="card-header">
-            <h4 class="card-title text-center mb-0">
-                Create New Account
-            </h4>
+            <div class="row">
+                <div class="col-6">
+                    <h3>Creating Student Account</h3>
+                </div>
+                <div class="col-6">
+                    <a class="btn btn-primary float-right" href="{{route('admin.students.index')}}"><i class="fas fa-arrow-circle-left mr-2"></i>Back</a>
+                </div>
+
+            </div>
         </div>
         <div class="card-body">
-
-
-            <form action="{{ route('register') }}" method="post">
+            <form action="{{route('admin.student.store')}}" method="post">
+                
                 @csrf
                 <div class="form-group">
                     <label for="name">Name</label>
@@ -35,9 +37,12 @@
                     <label for="faculty_id">Faculty</label>
                     <select name="faculty_id" class="form-control" required>
                         <option selected>Choose faculty</option>
-                        @foreach ($faculties as $faculty )
-                        <option value="{{$faculty->id}}">{{$faculty->name}}</option>
-                        @endforeach
+                        
+                        <option value="1">BscCsit</option>
+                        <option value="2">BCA</option>
+                        <option value="3">BIM</option>
+
+                       
 
                     </select>
                 </div>
@@ -60,23 +65,25 @@
                     <label for="password">Password</label>
                     <input type="password" id="password" class="form-control" name="password" required>
                 </div>
-                <div class="form-group">
-                    <label for="confirm_password">Confirm Password</label>
-                    <input type="password" id="confirm_password" class="form-control" name="password_confirmation" required>
-                </div>
-
-                <button class="btn btn-primary btn-lg">
-                    Register
-                </button>
-
+                
+                
+                
+                
+                
+                <button class="btn btn-primary">Save</button>
             </form>
-        </div>
-        <div class="card-footer">
-            Already have an account? <a href="{{ route('login') }}">Log In</a>
+
         </div>
     </div>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-  
-</body>
-</html>
+
+@endsection
+
+
+
+
+
+
+
+
+
+

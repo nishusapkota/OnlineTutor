@@ -23,7 +23,7 @@ return new class extends Migration
             $table->integer('semester_id')->nullable();
             $table->string('password');
             $table->string('role')->default('student');
-        
+            
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
 

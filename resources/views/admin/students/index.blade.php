@@ -10,6 +10,9 @@
                 <div class="col-6">
                     <h3>Student Info</h3>
                 </div>
+                <div class="col-6">
+                    <a class="btn btn-primary float-right" href="{{route('admin.student.create')}}"><i class="fas fa-plus circle-left mr-2"></i>Add Student</a>
+                </div>
                
 
             </div>
@@ -40,7 +43,7 @@
                         <td>{{$user->name}}</td>
                         <td>{{$user->semester->sem}}</td>
                         <td>{{$user->faculty->name}}</td>
-
+                        
                         <td>
                         <a class="btn btn-secondary" href="{{route('admin.students.show',$user)}}"><i class="fas fa-eye"></i>Show</a>
                                 <a class="btn btn-warning" href="{{route('admin.students.edit',$user)}}"><i class="fas fa-edit"></i>Edit</a>

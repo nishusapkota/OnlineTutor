@@ -46,6 +46,8 @@ Route::prefix('/administrator')->name('admin.')->group(function(){
     Route::DELETE('/instructor/{user}',[\App\Http\Controllers\Admin\InstructorController::class,'destroy'])->name('instructor.destroy');
 
     Route::get('/students',[\App\Http\Controllers\Admin\StudentController::class,'index'])->name('students.index');
+    Route::get('/student/create',[\App\Http\Controllers\Admin\StudentController::class,'create'])->name('student.create');
+    Route::POST('/student',[\App\Http\Controllers\Admin\StudentController::class,'store'])->name('student.store');
     Route::get('/students/{user}/edit',[\App\Http\Controllers\Admin\StudentController::class,'edit'])->name('students.edit');
     Route::PUT('/students/{user}',[\App\Http\Controllers\Admin\StudentController::class,'update'])->name('students.update');
     Route::get('students/{user}',[\App\Http\Controllers\Admin\StudentController::class,'show'])->name('students.show');

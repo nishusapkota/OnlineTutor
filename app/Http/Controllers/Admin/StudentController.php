@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Mail\NewUserMail;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Validation\Rules\Password;
 
 class StudentController extends Controller
 {
@@ -19,19 +22,36 @@ class StudentController extends Controller
         return view('admin.students.index',compact('users'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function create()
+    {
+        return view('admin.students.create');
+    }
     
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
+    public function store(Request $request)
+    {
+        $validatedData=$request->validate([
+            'name'=>['required'],
+            'email'=>['required','unique:users,email'],
+            'password'=>['required',Password::min(6)->letters()->numbers()],
+            'faculty_id'=>['required'],
+            'semester_id'=>['required'],
+        ]);
+        $data = [
+            'email' => $validatedData['email'],
+            'password' => $validatedData['password']
+        ];
+        Mail::to($validatedData['email'])->send(new NewUserMail($data));
+
+        $user=User::create([
+            'name'=>$request->name,
+            'email'=>$request->email,
+            'password'=>bcrypt($request->password),
+            'semester_id'=>$request->semester_id,
+            'faculty_id'=>$request->faculty_id,
+        ]);
+        return redirect()->route('admin.students.index');
+    }
     public function show(User $user)
     {
         return view('admin.students.show',compact('user'));
@@ -61,13 +81,15 @@ class StudentController extends Controller
             'name'=>['required'],
             'email'=>['required'],
             'faculty'=>['required'],
-            'semester'=>['required']
+            'semester'=>['required'],
+            
         ]);
         $user->update([
             'name'=>$request->name,
             'email'=>$request->email,
             'semester'=>$request->semester,
-            'faculty'=>$request->faculty
+            'faculty'=>$request->faculty,
+            
         ]);
         return redirect()->route('admin.students.index')->with('success','Student info updated successfully');
     }

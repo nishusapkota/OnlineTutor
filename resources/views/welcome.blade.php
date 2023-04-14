@@ -93,9 +93,7 @@
                                 <li> <a href="{{ route('login') }}" class="nav-link">Student Login</a></li>
 
 
-                                @if (Route::has('register'))
-                                <li><a href="{{ route('register') }}" class="nav-link">Register</a></li>
-                                @endif
+                                
                                 @endauth
 
                                 @endif

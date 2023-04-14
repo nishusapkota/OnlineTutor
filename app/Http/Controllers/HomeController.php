@@ -12,12 +12,19 @@ class HomeController extends Controller
 {
     public function home()
     {
+
         if (auth()->user()->role == 'admin') {
             return redirect('/administrator');
-        } else if (auth()->user()->role == 'teacher') {
-            return redirect('/tutor');
         } 
-            return redirect('/student');
+        else if(auth()->user()->role=='student')
+         {
+                return redirect('/student');
+            } 
+            
+        else 
+            return redirect('/tutor');
+        
+        
         
     }
 
@@ -30,14 +37,17 @@ class HomeController extends Controller
     
     public function studenthomepage(){
         //$id=Auth::user()->id;
-        $fid=Auth::user()->faculty_id;
-       // $faculty=Faculty::where('id',$fid)->first();
-        $sid=Auth::user()->semester_id;
-       // $semester=Semester::where('id',$sid)->first();
-$courses=Course::all()->where('faculty_id',$fid)->where('semester_id',$sid);
        
-       return view("student.homepage",compact('courses'));
-        //dd($courses);
+            $fid=Auth::user()->faculty_id;
+            // $faculty=Faculty::where('id',$fid)->first();
+             $sid=Auth::user()->semester_id;
+            // $semester=Semester::where('id',$sid)->first();
+     $courses=Course::all()->where('faculty_id',$fid)->where('semester_id',$sid);
+            
+            return view("student.homepage",compact('courses'));
+           
+        
+          //dd($courses);
     }
 
 }

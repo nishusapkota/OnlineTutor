@@ -26,6 +26,7 @@ class UserSeeder extends Seeder
             'semester_id'=>'7',
             'password'=>bcrypt('heera123'), 
             'role'=>'student',
+            
         ]);
         User::create([
             'name'=>'Lanisha',
@@ -34,6 +35,7 @@ class UserSeeder extends Seeder
             'semester_id'=>'7',
             'password'=>bcrypt('lanisha123'), 
             'role'=>'student',
+           
         ]);
         User::create([
             'name'=>'Rachana',
@@ -42,6 +44,7 @@ class UserSeeder extends Seeder
             'semester_id'=>'7',
             'password'=>bcrypt('rachana123'), 
             'role'=>'student',
+            
         ]);
         User::create([
             'name'=>'Thani',
@@ -50,6 +53,7 @@ class UserSeeder extends Seeder
             'semester_id'=>'7',
             'password'=>bcrypt('thani123'), 
             'role'=>'student',
+           
         ]);
         User::create([
             'name'=>'Roshan',
@@ -58,6 +62,7 @@ class UserSeeder extends Seeder
             'semester_id'=>'7',
             'password'=>bcrypt('roshan123'), 
             'role'=>'student',
+            
         ]);
         User::create([
             'name'=>'Nishu',
@@ -109,6 +114,7 @@ class UserSeeder extends Seeder
             'semester_id'=>'7',
             'password'=>bcrypt('neetu123'), 
             'role'=>'student',
+           
         ]);
     }
 }
