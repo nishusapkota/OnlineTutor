@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Comment;
 
+use App\Models\Post;
 use App\Models\User;
 use App\Models\Course;
 use App\Models\Assignment;
@@ -34,11 +36,43 @@ class StudentController extends Controller
             'user_id'=>$id,
          ]);
          return redirect()->back();
+    }
+
+    public function post_index(Course $course)
+    {
+       
+        $semid=$course->semester_id;
+        $cid=$course->id;
+        $fid=$course->faculty_id;
+        $course1=$course->course;
+        $comments=Comment::all();
+       $users=User::all()->where('semester_id',$semid)->where('faculty_id',$fid);
+       $posts = Post::with('comments.replies', 'course')->latest()->paginate(3);
+    
+     return view('student.post',compact('course1','semid','fid','posts'));
+    }
+    public function comment(Request $request,Post $post)
+    {
+        // Validate the request data
+    $validatedData = $request->validate([
+        'comment' => 'required|string|max:500',
+    ]);
+
+    // Create a new comment instance
+    $comment = new Comment;
+    $comment->user_id = auth()->user()->id; // Set the user_id to the current authenticated user's id
+    $comment->post_id = $post->id; // Set the post_id to the id of the post being commented on
+    $comment->comment = $validatedData['comment'];
+
+    // If this is a reply to another comment, set the parent_id to that comment's id
+    if ($request->has('parent_id')) {
+        $comment->parent_id = $request->input('parent_id');
+    }
+
+    $comment->save(); // Save the comment to the database
+
+    return redirect()->back();
+
         
-        
-
-
-
-
     }
 }

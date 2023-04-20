@@ -107,7 +107,7 @@
               <a href="{{route('tutor.note_create',$course)}}"><i class="fa fa-book" aria-hidden="true"></i>
                 Notes</a>
               
-              <a href="{{route('tutor.create_notice',$course)}}"><i class="fa fa-plus" aria-hidden="true"></i>Notices
+              <a href="{{route('tutor.create_post',$course)}}"><i class="fa fa-plus" aria-hidden="true"></i>Notices
               </a>
               <a href=""><i class="fa fa-comments" aria-hidden="true"></i> chat</a>
             </div>

@@ -18,7 +18,7 @@
 <center>
 <iframe src="{{asset('/storage/assignments/'.$assignment->student_assignment)}}" width="850px" height="600px"></iframe>
 <hr style="border:1px solid gray; width:850px" >
-<form action="{{route('tutor.remarks',$assignment)}}" method="post">
+<form action="{{route('tutor.remarks',[$assignment])}}" method="post">
   @csrf
   <input type="text" name="remarks" placeholder="Remarks here...." style="display: inline-block; width: 600px;">
   <button type="submit" class="btn btn-primary" tyle="display: inline-block;">Submit</button>

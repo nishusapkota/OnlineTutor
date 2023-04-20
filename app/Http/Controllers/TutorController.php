@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Note;
 use App\Models\User;
 use App\Models\Course;
-use App\Models\Notice;
+use App\Models\Post;
 use App\Models\Faculty;
 use App\Models\Remarks;
 use App\Models\Semester;
@@ -81,7 +81,7 @@ public function remark(Request $request,StudentAssignment $assignment)
 'student_assignment_id'=>$assignment->id,
 'remark'=>$request->remarks,
   ]);
-  return redirect()->route('tutor.uploaded_assignment',$assignment);
+  return redirect()->route('tutor.uploaded_assignment',[$assignment->assignment_id]);
 }
 
 
@@ -128,18 +128,18 @@ public function remark(Request $request,StudentAssignment $assignment)
   }
 
 
-  public function create_notice(Course $course)
+  public function create_post(Course $course)
 {
-  return view('tutor.notice_create',compact('course'));
+  return view('tutor.post_create',compact('course'));
 }
-public function upload_notice(Request $request,Course $course)
+public function upload_post(Request $request,Course $course)
 {
   
-  Notice::create([
+  Post::create([
     'courses_id'=>$course->id,
-    'notice'=>$request->notice,
+    'post'=>$request->post,
   ]);
-  return redirect()->back()->with('success','Notice updated successfully.');
+  return redirect()->back()->with('success','post updated successfully.');
 }
 
 }

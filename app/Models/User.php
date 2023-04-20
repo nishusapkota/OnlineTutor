@@ -26,7 +26,9 @@ class User extends Authenticatable
     function studentAssignment(){
         return $this->hasMany('\App\Models\StudentAssignment');
     }
-
+    function comments(){
+        return $this->hasMany('\App\Models\Comment');
+    }
 
     /**
      * The attributes that are mass assignable.

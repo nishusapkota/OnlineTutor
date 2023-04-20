@@ -120,32 +120,83 @@
         <div class="col-12 bg-light">
         <div class="card">
           <div class="card-body" style="box-shadow: 0px 2px 18px 0px rgba(0,0,0,0.2);max-height:280px; overflow-y:scroll">
-          
-          @yield('content')
+          <form action="{{route('tutor.post_upload',$course)}}" method="POST" enctype="multipart/form-data" >
+              @csrf
+
+              @if($errors->any())
+              <div class="alert alert-danger">{{$errors->first()}}</div>
+              @endif
+              @if(session('success'))
+              <div class="alert alert-success">
+                <button class="close" data-dismiss="alert">X</button>
+                {{session('success')}}
+              </div>
+              @endif
+
+              <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title"
+            value="{{ old('title') }}">
+        @error('title')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+    <div class="form-group">
+        <label for="image">Image</label>
+        <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image">
+        @error('image')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+    <div class="form-group">
+        <label for="slug">Slug</label>
+        <input type="text" class="form-control @error('slug') is-invalid @enderror" id="slug" name="slug"
+            value="{{ old('slug') }}">
+        @error('slug')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+    
+    <div class="form-group">
+        <label for="body">Body</label>
+        <textarea class="form-control @error('body') is-invalid @enderror" id="body" name="body"
+            rows="5">{{ old('body') }}</textarea>
+        @error('body')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+
+              <button type="submit" name="submit" class="btn btn-secondary my-1">Upload</button>
+            </form>
+
+         
           </div>
         </div>
         
         </div>
         
       </div>
-    </div>
-
-
-
-
-
 
 </div>
   <script src="{{asset('ckeditor/ckeditor.js')}}"></script>
   <script>
     ClassicEditor
-      .create(document.querySelector(''), {
+      .create(document.querySelector('#body'), {
 
         licenseKey: '',
 
 
 
       })
+      
       .then(editor => {
         window.editor = editor;
 
@@ -159,6 +210,8 @@
         console.warn('Build id: ympsfd2pd8k0-o86wbtxp1mvj');
         console.error(error);
       });
+
+
   </script>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -167,3 +220,7 @@
 </body>
 
 </html>
+
+
+
+

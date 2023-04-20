@@ -67,8 +67,8 @@ Route::prefix('/tutor')->name('tutor.')->group(function(){
     Route::post('/remarks/{assignment}',[\App\Http\Controllers\TutorController::class,'remark'])->name('remarks');
     Route::get('/note/create/{course}',[\App\Http\Controllers\TutorController::class,'create_note'])->name('note_create');
     Route::post('/note/create/{course}',[\App\Http\Controllers\TutorController::class,'store_note'])->name('note_store');
-    Route::get('/notice/create/{course}',[\App\Http\Controllers\TutorController::class,'create_notice'])->name('create_notice');
-    Route::post('/notice/{course}',[\App\Http\Controllers\TutorController::class,'upload_notice'])->name('notice_upload');
+    Route::get('/post/create/{course}',[\App\Http\Controllers\PostController::class,'create_post'])->name('create_post');
+    Route::post('/post/{course}',[\App\Http\Controllers\PostController::class,'upload_post'])->name('post_upload');
     
 });
 
@@ -82,7 +82,8 @@ Route::prefix('/student')->middleware('auth','isStudent')->name('student.')->gro
     Route::get('/',[\App\Http\Controllers\HomeController::class, 'studenthomepage'])->name('homepage');
     Route::get('/course/{course}',[\App\Http\Controllers\StudentController::class,'course_index'])->name('course');
     Route::post('/assignment/{assignment}',[\App\Http\Controllers\StudentController::class,'upload_assignment'])->name('upload_assignment');
-
+    Route::get('/post/{course}',[\App\Http\Controllers\StudentController::class,'post_index'])->name('post');
+    Route::post('/comment/{post}',[\App\Http\Controllers\StudentController::class,'comment'])->name('comment');
 });
 
 

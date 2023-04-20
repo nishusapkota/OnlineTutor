@@ -38,6 +38,10 @@
                 
                 <div class="form-group">
                     <label for="role">Role</label>
+                    <select name="role" class="form-control">
+                        <option value="teacher">teacher</option>
+                        <option value="admin">admin</option>
+                    </select>
                     <input type="text" class="form-control" name="role">
                 </div>
                 <button class="btn btn-primary">Save</button>
