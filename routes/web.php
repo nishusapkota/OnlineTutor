@@ -84,6 +84,8 @@ Route::prefix('/student')->middleware('auth','isStudent')->name('student.')->gro
     Route::post('/assignment/{assignment}',[\App\Http\Controllers\StudentController::class,'upload_assignment'])->name('upload_assignment');
     Route::get('/post/{course}',[\App\Http\Controllers\StudentController::class,'post_index'])->name('post');
     Route::post('/comment/{post}',[\App\Http\Controllers\StudentController::class,'comment'])->name('comment');
+    Route::get('/note/{course}',[\App\Http\Controllers\StudentController::class,'note_index'])->name('note');
+
 });
 
 

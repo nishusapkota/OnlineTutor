@@ -90,16 +90,16 @@
             <div class="row mx-auto bg-success">
                 <div class="card" style="width:100%; height:max-content;">
                     <div class="card-body">
-                        <h5 class="text-center"><i class="fa fa-book"></i>{{$course1}}</h5>
+                        <h5 class="text-center"><i class="fa fa-book"></i>{{$course->course}}</h5>
                         
                         <div class="row">
                         <div class="col-5 ml-auto d-flex flex-row align-items-right" id="hyperlink1">
-                            <a href=""><i class="fa fa-pencil-square" aria-hidden="true"></i>
+                            <a href="{{route('student.course',[$course])}}"><i class="fa fa-pencil-square" aria-hidden="true"></i>
                                 Assignment</a>
-                            <a href=""><i class="fa fa-book" aria-hidden="true"></i>
+                            <a href="{{route('student.note',[$course])}}"><i class="fa fa-book" aria-hidden="true"></i>
                                 Notes</a>
                             <!--<a href=""><i class="fa fa-file-video-o" aria-hidden="true"></i>Video File</a>-->
-                            <a href=""><i class="fa fa-plus" aria-hidden="true"></i>Posts
+                            <a href="{{route('student.post',[$course])}}"><i class="fa fa-plus" aria-hidden="true"></i>Posts
                             </a>
                             <a href=""><i class="fa fa-comments" aria-hidden="true"></i> chat</a>
                         </div>
@@ -120,7 +120,7 @@
             <p class="card-text">{!! $post->body !!}</p>
             <small>Posted on {{ $post->created_at }}</small><br>
             @if ($post->image !="null")
-              <img src="{{ asset('images/' . $post->image) }}" alt="Post image" width="500" height="300">
+              <img src="{{ asset('images/' . $post->image) }}" width="500" height="300">
             @endif
             
             <hr>

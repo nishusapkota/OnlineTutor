@@ -96,19 +96,20 @@ public function remark(Request $request,StudentAssignment $assignment)
       'chapter' => ['required', 'integer'],
       'title' => ['required'],
       'video' => ['nullable', 'mimes:mpeg,ogg,mp4,webm,3gp,mov,flv,avi,wmv,ts', 'max:100040'],
-      'note' => ['required', 'file', 'mimes:ppt,pptx,docx,doc,pdf,xls,xlsx', 'max:204800'],
+      'note' => ['required', 'file', 'mimes:ppt,pptx,docx,doc,pdf,xls,xlsx,txt', 'max:204800'],
     ]);
 
     if ($request->hasFile('video')) {
       $videos = time() . "." . $request->file('video')->getClientOriginalExtension();
-      $path2 = $request->file('video')->storeAs('video_file', $videos);
-      $note['video'] = $path2;
+     $request->file('video')->move(public_path('Videos'), $videos);
+      $note['video'] = $videos;
     } else {
       $note['video'] = "null";
     }
 
     $file = time() . "." . $request->file('note')->getClientOriginalExtension();
-    $path1 = $request->file('note')->storeAs('Notes', $file);
+    
+    $request->file('note')->move(public_path('Notes'), $file);
 
     /* Note::create([
         'course_id'=>
@@ -119,7 +120,7 @@ public function remark(Request $request,StudentAssignment $assignment)
     $note['course_id'] = $course->id;
     $note['chapter'] = $request->chapter;
     $note['title'] = $request->title;
-    $note['note'] = $path1;
+    $note['note'] = $file;
     Note::create($note);
 
 
@@ -128,19 +129,7 @@ public function remark(Request $request,StudentAssignment $assignment)
   }
 
 
-  public function create_post(Course $course)
-{
-  return view('tutor.post_create',compact('course'));
-}
-public function upload_post(Request $request,Course $course)
-{
   
-  Post::create([
-    'courses_id'=>$course->id,
-    'post'=>$request->post,
-  ]);
-  return redirect()->back()->with('success','post updated successfully.');
-}
 
 }
 

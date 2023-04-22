@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Comment;
+use App\Models\Note;
 
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Course;
+use App\Models\Comment;
 use App\Models\Assignment;
 use Illuminate\Http\Request;
 use App\Models\StudentAssignment;
@@ -44,12 +45,11 @@ class StudentController extends Controller
         $semid=$course->semester_id;
         $cid=$course->id;
         $fid=$course->faculty_id;
-        $course1=$course->course;
         $comments=Comment::all();
        $users=User::all()->where('semester_id',$semid)->where('faculty_id',$fid);
        $posts = Post::with('comments.replies', 'course')->latest()->paginate(3);
     
-     return view('student.post',compact('course1','semid','fid','posts'));
+     return view('student.post',compact('course','semid','fid','posts'));
     }
     public function comment(Request $request,Post $post)
     {
@@ -71,8 +71,18 @@ class StudentController extends Controller
 
     $comment->save(); // Save the comment to the database
 
-    return redirect()->back();
+    return redirect()->back();     
+    }
 
+
+
+    public function note_index(Course $course)
+    {
+       $semid=$course->semester_id;
+        $cid=$course->id;
+        $fid=$course->faculty_id;
+        $notes=Note::where('course_id',$cid)->Paginate(2);
         
+     return view('student.note',compact('course','semid','fid','notes'));  
     }
 }

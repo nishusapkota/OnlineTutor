@@ -91,56 +91,56 @@
                 <div class="card" style="width:100%;">
                     <div class="card-body">
                         <h5 class="text-center"><i class="fa fa-book"></i>{{$course->course}}</h5>
-                        
+
                         <div class="row">
-                        <div class="col-5 ml-auto d-flex flex-row align-items-right" id="hyperlink1">
-                            <a href=""><i class="fa fa-pencil-square" aria-hidden="true"></i>
-                                Assignment</a>
-                            <a href=""><i class="fa fa-book" aria-hidden="true"></i>
-                                Notes</a>
-                            <!--<a href=""><i class="fa fa-file-video-o" aria-hidden="true"></i>Video File</a>-->
-                            <a href="{{route('student.post',[$course])}}"><i class="fa fa-plus" aria-hidden="true"></i>Posts
-                            </a>
-                            <a href=""><i class="fa fa-comments" aria-hidden="true"></i> chat</a>
+                            <div class="col-5 ml-auto d-flex flex-row align-items-right" id="hyperlink1">
+                                <a href="{{route('student.course',[$course])}}"><i class="fa fa-pencil-square" aria-hidden="true"></i>
+                                    Assignment</a>
+                                <a href="{{route('student.note',[$course])}}"><i class="fa fa-book" aria-hidden="true"></i>
+                                    Notes</a>
+                                <!--<a href=""><i class="fa fa-file-video-o" aria-hidden="true"></i>Video File</a>-->
+                                <a href="{{route('student.post',[$course])}}"><i class="fa fa-plus" aria-hidden="true"></i>Posts
+                                </a>
+                                <a href=""><i class="fa fa-comments" aria-hidden="true"></i> chat</a>
+                            </div>
                         </div>
-                        </div>
-                        
+
                     </div>
-                    
+
                 </div>
             </div>
             <div class="row mx-auto mt-2">
                 <div class="card" style="width:100%;">
                     <div class="card-body">
-                    <h5>Assignments</h5>
-                    <table class="table table-bordered  mt-3" style="box-shadow: 0px 2px 18px 0px rgba(0,0,0,0.5);">
-                        <tr class="bg-primary">
-                            <th>Created At</th>
-                            <th>Updated At</th>
-                            <th>Assignment</th>
-                            <th>Action</th>
-                        </tr>
-                        @foreach ($assignments as $assignment )   
-                        <tr>
-                            <td>{!! $assignment->created_at!!}</td>
-                            <td>{!! $assignment->updated_at!!}</td>
-                            <td>{!! $assignment->assignment!!}</td>
-                            <td>
-                                <form action="{{route('student.upload_assignment',$assignment)}}" method="POST" enctype="multipart/form-data">
-                                    @csrf
-                                    <input type="file" name="file"><br>
-                                    <button class="btn btn-success" type="submit">Upload</button>
-                                </form>
-                            </td>
-                        </tr>
-                        @endforeach
-                        
-                    </table>
-                    {{$assignments->links()}}
-                    
+                        <h5>Assignments</h5>
+                        <table class="table table-bordered  mt-3" style="box-shadow: 0px 2px 18px 0px rgba(0,0,0,0.5);">
+                            <tr class="bg-primary">
+                                <th>Created At</th>
+                                <th>Updated At</th>
+                                <th>Assignment</th>
+                                <th>Action</th>
+                            </tr>
+                            @foreach ($assignments as $assignment )
+                            <tr>
+                                <td>{!! $assignment->created_at!!}</td>
+                                <td>{!! $assignment->updated_at!!}</td>
+                                <td>{!! $assignment->assignment!!}</td>
+                                <td>
+                                    <form action="{{route('student.upload_assignment',$assignment)}}" method="POST" enctype="multipart/form-data">
+                                        @csrf
+                                        <input type="file" name="file"><br>
+                                        <button class="btn btn-success" type="submit">Upload</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            @endforeach
+
+                        </table>
+                        {{$assignments->links()}}
+
                     </div>
                 </div>
-                
+
             </div>
         </div>
 
