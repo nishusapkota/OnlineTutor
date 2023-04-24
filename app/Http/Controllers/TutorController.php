@@ -66,15 +66,17 @@ class TutorController extends Controller
     $faculty=Faculty::where('id',$fid)->first();
     $faculty=$faculty->name;
 
-    $assignments = StudentAssignment::all()->where('assignment_id', $assignment->id);
-    return view('tutor.student_assignment', compact('assignments','course','name','sem','faculty'));
+    $student_assignments = StudentAssignment::all()->where('assignment_id', $assignment->id);
+    //dd($student_assignments);
+   // die();
+    return view('tutor.student_assignment', compact('assignment','student_assignments','course','name','sem','faculty'));
   }
 
-  public function show_assignment(StudentAssignment $assignment)
-  {
-    //dd($assignment);
-    return view('tutor.show_assignment', compact('assignment'));
-  }
+  //public function show_assignment(Assignment $assignment)
+ // {
+    
+ //  return view('tutor.show_assignment', compact('assignment'));
+  //}
 public function remark(Request $request,StudentAssignment $assignment)          
 {
   Remarks::create([

@@ -44,7 +44,7 @@
     }
 
     .banner .nav li a {
-     
+
       color: #e8c784;
       font-size: 20px;
     }
@@ -59,16 +59,17 @@
       color: gray;
       text-decoration: none;
     }
+
     #hyperlink1 a:hover {
-     
+
       color: black;
-      text-decoration:none;
+      text-decoration: none;
     }
   </style>
 </head>
 
 <body>
-<div class="cotainer-fluid banner">
+  <div class="cotainer-fluid banner">
     <div class="row mb-3" style="background:gray;background-position: top;
       background-size: cover;
       background-repeat: no-repeat;
@@ -94,85 +95,106 @@
 
     <div class="container bg-light mt-5 py-3">
       <div class="row mx-auto">
-      <div class="card mx-auto" style="width:100%;">
+        <div class="card mx-auto" style="width:100%;">
           <div class="card-body">
             <h5 class="text-center"><i class="fa fa-book"></i>{{$name}}</h5>
             <p class="text-left"><b>Semester:</b>{{$sem}}</p>
             <p class="text-left"><b>Faculty:</b>{{$faculty}}</p>
             <div class="row ml-5 mb-2">
-            <div class="col-6"></div>
-            <div class="col d-flex flex-row" id="hyperlink1">
-              <a href="{{route('tutor.assignment.index',$course)}}"><i class="fa fa-pencil-square" aria-hidden="true"></i>
-                Assignment</a>
-              <a href="{{route('tutor.note_create',$course)}}"><i class="fa fa-book" aria-hidden="true"></i>
-                Notes</a>
-              
-              <a href="{{route('tutor.create_post',$course)}}"><i class="fa fa-plus" aria-hidden="true"></i>Posts
-              </a>
-              <a href=""><i class="fa fa-comments" aria-hidden="true"></i> chat</a>
+              <div class="col-6"></div>
+              <div class="col d-flex flex-row" id="hyperlink1">
+                <a href="{{route('tutor.assignment.index',$course)}}"><i class="fa fa-pencil-square" aria-hidden="true"></i>
+                  Assignment</a>
+                <a href="{{route('tutor.note_create',$course)}}"><i class="fa fa-book" aria-hidden="true"></i>
+                  Notes</a>
+
+                <a href="{{route('tutor.create_post',$course)}}"><i class="fa fa-plus" aria-hidden="true"></i>Posts
+                </a>
+                <a href=""><i class="fa fa-comments" aria-hidden="true"></i> chat</a>
+              </div>
             </div>
           </div>
-          </div>
-          
+
         </div>
       </div>
       <div class="row mx-auto mt-3">
         <div class="col-12 bg-light">
-        <div class="card">
-          <div class="card-body" style="box-shadow: 0px 2px 18px 0px rgba(0,0,0,0.2);max-height:280px; overflow-y:scroll">
           <div class="card">
-    <div class="card-header">
-        <div class="row">
-            <div class="col-6"> <h5>Student Assignments</h5></div>
- </div>
-        </div>
-     </div>
-       
-    <div class="card-body">
-        <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Student Name</th>
-                <th>Submitted_At</th>
-                <th>Due_Date</th>
-                <th>Assignment</th>
-                
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($assignments as $assignment)
-            <tr>
-                <td>{{$assignment->id}}</td>
-                <td>{{$assignment->user->name}}</td>
-                <td>{{$assignment->created_at}}</td>
-                <td>{{$assignment->assignment->due_date}}</td>
-                <td><a href="{{route('tutor.show_assignment', $assignment->id)}}" class="btn btn-success">View</a></td>
-                
-            </tr>
-            @endforeach
-            
-        </tbody>
-       
-        </table>
-      
-    </div>
-</div>
-          
+            <div class="card-body" style="box-shadow: 0px 2px 18px 0px rgba(0,0,0,0.2);max-height:280px; overflow-y:scroll">
+              <div class="card">
+                <div class="card-header">
+                  <div class="row">
+                    <div class="col-6">
+                      <h5>Student Assignments</h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card-body">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Id</th>
+                      <th>Student Name</th>
+                      <th>Submitted_At</th>
+                      <th>Due_Date</th>
+                      <th>Assignment</th>
+                      <th>Remarks</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @foreach ($student_assignments as $student_assignment)
+                    <tr>
+                      <td>{{$student_assignment->id}}</td>
+                      <td>{{$student_assignment->user->name}}</td>
+                      <td>{{$student_assignment->created_at}}</td>
+                      <td>{{$student_assignment->assignment->due_date}}</td>
+                      <td>
+                        <a href="{{ asset('student_assignment/'.$student_assignment->student_assignment) }}" target="_blank">
+                          @if(in_array(pathinfo($student_assignment->student_assignment, PATHINFO_EXTENSION), ['ppt', 'pptx']))
+                          <i class="fas fa-file-powerpoint"></i>
+                          @elseif(in_array(pathinfo($student_assignment->student_assignment, PATHINFO_EXTENSION), ['doc', 'docx']))
+                          <i class="fas fa-file-word"></i>
+                          @elseif(in_array(pathinfo($student_assignment->student_assignment, PATHINFO_EXTENSION), ['pdf']))
+                          <i class="fas fa-file-pdf"></i>
+                          @elseif(in_array(pathinfo($student_assignment->student_assignment, PATHINFO_EXTENSION), ['xls', 'xlsx']))
+                          <i class="fas fa-file-excel"></i>
+                          @elseif(in_array(pathinfo($student_assignment->student_assignment, PATHINFO_EXTENSION), ['txt']))
+                          <i class="fas fa-file-alt"></i>
+                          @endif
+                          {{ $student_assignment->student_assignment }}
+                        </a>
+                      </td>
+<td><form action="{{route('tutor.remarks',[$assignment])}}" method="post">
+  @csrf
+  <input type="text" name="remarks" placeholder="Remarks here...." style="display: inline-block; width: 200px;">
+  <button type="submit" class="btn btn-primary" tyle="display: inline-block;">Submit</button>
+</form></td>
+                    </tr>
+                    @endforeach
+
+                  </tbody>
+
+                </table>
+
+              </div>
+            </div>
+
           </div>
         </div>
-        
-        </div>
-        
+
       </div>
+
     </div>
+  </div>
 
 
 
 
 
 
-</div>
+  </div>
   <script src="{{asset('ckeditor/ckeditor.js')}}"></script>
   <script>
     ClassicEditor
@@ -204,6 +226,3 @@
 </body>
 
 </html>
-
-
-

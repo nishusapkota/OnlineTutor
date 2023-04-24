@@ -27,15 +27,18 @@ class StudentController extends Controller
     
     public function upload_assignment(Request $request,Assignment $assignment)
     {
+        $request->validate([
+            'file' => 'required|file|mimes:pdf,docx,txt',
+        ]);
         $id=Auth::user()->id;
         $filename=time().".".$request->file('file')->getClientOriginalExtension();
-        $path=$request->file('file')->storeAs('public/assignments',$filename);
+        $path=$request->file('file')->move(public_path('student_assignment'), $filename);
       
         StudentAssignment::create([
             'assignment_id'=>$assignment->id,
             'student_assignment'=>$filename,
             'user_id'=>$id,
-         ]);
+        ]);
          return redirect()->back();
     }
 
