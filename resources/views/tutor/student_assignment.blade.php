@@ -110,7 +110,20 @@
 
                 <a href="{{route('tutor.create_post',$course)}}"><i class="fa fa-plus" aria-hidden="true"></i>Posts
                 </a>
-                <a href=""><i class="fa fa-comments" aria-hidden="true"></i> chat</a>
+                <li class="dropdown">
+                  <a href="" class="dropdown-toogle" data-toogle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+                    <i class="fa fa-bell" aria-hidden="true"></i>
+                    <span class="badge badge-light">
+                      {{auth()->user()->notifications()->count()}}
+                    </span>
+                  </a>
+                  <ul class="dropdown-menu">
+                    @foreach (auth()->user()->notifications as $notification )
+                      <li><a href="">{{$notification->data['data']}}</a></li>
+                    @endforeach
+                  </ul>
+                </li>
+
               </div>
             </div>
           </div>
@@ -166,11 +179,13 @@
                           {{ $student_assignment->student_assignment }}
                         </a>
                       </td>
-<td><form action="{{route('tutor.remarks',[$assignment])}}" method="post">
-  @csrf
-  <input type="text" name="remarks" placeholder="Remarks here...." style="display: inline-block; width: 200px;">
-  <button type="submit" class="btn btn-primary" tyle="display: inline-block;">Submit</button>
-</form></td>
+                      <td>
+                        <form action="{{route('tutor.remarks',[$assignment])}}" method="post">
+                          @csrf
+                          <input type="text" name="remarks" placeholder="Remarks here...." style="display: inline-block; width: 200px;">
+                          <button type="submit" class="btn btn-primary" tyle="display: inline-block;">Submit</button>
+                        </form>
+                      </td>
                     </tr>
                     @endforeach
 

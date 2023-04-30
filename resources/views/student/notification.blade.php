@@ -1,3 +1,6 @@
+
+    
+
 <!doctype html>
 <html lang="en">
 
@@ -143,7 +146,7 @@
                                 <th>Assignment</th>
                                 <th>Action</th>
                             </tr>
-                            @foreach ($assignments as $assignment )
+                           
                             <tr>
                                 <td>{!! $assignment->created_at!!}</td>
                                 <td>{!! $assignment->updated_at!!}</td>
@@ -156,10 +159,10 @@
                                     </form>
                                 </td>
                             </tr>
-                            @endforeach
+                           
 
                         </table>
-                        {{$assignments->links()}}
+                        
 
                     </div>
                 </div>

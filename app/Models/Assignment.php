@@ -10,7 +10,7 @@ class Assignment extends Model
 {
     use HasFactory;
     function course(){
-        return $this->belongsTo('Course');
+        return $this->belongsTo('\App\Models\Course');
     }
     function studentassignments()
     {

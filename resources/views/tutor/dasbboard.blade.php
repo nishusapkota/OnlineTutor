@@ -109,7 +109,8 @@
               
               <a href="{{route('tutor.create_post',$course)}}"><i class="fa fa-plus" aria-hidden="true"></i>Notices
               </a>
-              <a href=""><i class="fa fa-comments" aria-hidden="true"></i> chat</a>
+              <a href=""><i class="fa fa-bell" aria-hidden="true"></i>
+                                </a>
             </div>
           </div>
           </div>

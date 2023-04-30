@@ -1,14 +1,14 @@
 <?php
 
 use Admin\AdminController;
-use App\Http\Controllers\Admin\CourseController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\TutorController;
+use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\FacultyController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\InstructorController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\TutorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -85,6 +85,8 @@ Route::prefix('/student')->middleware('auth','isStudent')->name('student.')->gro
     Route::get('/post/{course}',[\App\Http\Controllers\StudentController::class,'post_index'])->name('post');
     Route::post('/comment/{post}',[\App\Http\Controllers\StudentController::class,'comment'])->name('comment');
     Route::get('/note/{course}',[\App\Http\Controllers\StudentController::class,'note_index'])->name('note');
+    Route::get('/assignment/{assignment}', [\App\Http\Controllers\Notification::class,'show'])->name('assignment.show');
+
 
 });
 

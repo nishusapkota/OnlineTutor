@@ -101,7 +101,8 @@
                                 <!--<a href=""><i class="fa fa-file-video-o" aria-hidden="true"></i>Video File</a>-->
                                 <a href="{{route('student.post',[$course])}}"><i class="fa fa-plus" aria-hidden="true"></i>Posts
                                 </a>
-                                <a href=""><i class="fa fa-comments" aria-hidden="true"></i> chat</a>
+                                <a href=""><i class="fa fa-bell" aria-hidden="true"></i>
+                                </a>
                             </div>
                         </div>
 

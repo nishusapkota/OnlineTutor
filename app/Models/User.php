@@ -29,6 +29,8 @@ class User extends Authenticatable
     function comments(){
         return $this->hasMany('\App\Models\Comment');
     }
+    
+
 
     /**
      * The attributes that are mass assignable.

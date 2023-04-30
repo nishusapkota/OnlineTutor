@@ -3,16 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Models\Note;
+use App\Models\Post;
 use App\Models\User;
 use App\Models\Course;
-use App\Models\Post;
 use App\Models\Faculty;
 use App\Models\Remarks;
 use App\Models\Semester;
 use App\Models\Assignment;
+
 use Illuminate\Http\Request;
 use App\Models\StudentAssignment;
 use Illuminate\Support\Facades\Auth;
+
+
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\NewAssignmentNotification;
 
 class TutorController extends Controller
 {
@@ -37,13 +42,17 @@ class TutorController extends Controller
     // dd($data);
     //Assignment::create($data);
     // return redirect('/');
-    Assignment::create([
+   $assignment= Assignment::create([
       'assignment' => $request->assignment,
       'due_date' => $request->due_date,
       'course_id' => $course_id,
-
     ]);
-    return redirect()->back();
+// Get the students enrolled in the course
+$students = User::where('semester_id', $course->semester_id)
+->where('faculty_id', $course->faculty_id)
+->get();
+ Notification::send($students,new NewAssignmentNotification($assignment));
+ return redirect()->back();
   }
 
   public function index(Course $course)
