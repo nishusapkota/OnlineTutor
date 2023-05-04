@@ -109,11 +109,11 @@
                                     <a href="" class="dropdown-toogle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
                                         <i class="fa fa-bell" aria-hidden="true"></i>
                                         <span class="badge badge-light" style="position: relative; left: -5px; background-color: red">
-                                            {{ auth()->user()->notifications()->count() }}
+                                            {{ auth()->user()->unreadNotifications()->count() }}
                                         </span>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        @forelse(auth()->user()->notifications as $notification)
+                                        @forelse(auth()->user()->unreadNotifications as $notification)
                                         <li>
                                             <a href="{{ $notification->data['url'] }}" class="dropdown-item">
                                                 {{ $notification->data['message'] }}

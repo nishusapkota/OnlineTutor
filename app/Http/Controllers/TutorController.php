@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\NewAssignmentNotification;
+use App\Notifications\NoteUploaded;
 
 class TutorController extends Controller
 {
@@ -103,13 +104,13 @@ public function remark(Request $request,StudentAssignment $assignment)
   }
   public function store_note(Course $course, Request $request)
   {
+    $newNote = [];
     $note = $request->validate([
       'chapter' => ['required', 'integer'],
       'title' => ['required'],
       'video' => ['nullable', 'mimes:mpeg,ogg,mp4,webm,3gp,mov,flv,avi,wmv,ts', 'max:100040'],
       'note' => ['required', 'file', 'mimes:ppt,pptx,docx,doc,pdf,xls,xlsx,txt', 'max:204800'],
     ]);
-
     if ($request->hasFile('video')) {
       $videos = time() . "." . $request->file('video')->getClientOriginalExtension();
      $request->file('video')->move(public_path('Videos'), $videos);
@@ -117,11 +118,8 @@ public function remark(Request $request,StudentAssignment $assignment)
     } else {
       $note['video'] = "null";
     }
-
     $file = time() . "." . $request->file('note')->getClientOriginalExtension();
-    
     $request->file('note')->move(public_path('Notes'), $file);
-
     /* Note::create([
         'course_id'=>
         'chapter'=>$request->chapter,
@@ -132,12 +130,15 @@ public function remark(Request $request,StudentAssignment $assignment)
     $note['chapter'] = $request->chapter;
     $note['title'] = $request->title;
     $note['note'] = $file;
-    Note::create($note);
-
-
-
-    return redirect()->route('tutor.note_create', $course)->with('success', "Notes uploaded successfully");
-  }
+    $newNote=Note::create($note);
+// Get the students enrolled in the course
+$students = User::where('semester_id', $course->semester_id)
+->where('faculty_id', $course->faculty_id)
+->get();
+$course_name=$course->course;
+ Notification::send($students,new NoteUploaded($course_name,$newNote->id));
+ return redirect()->route('tutor.note_create', $course)->with('success', "Notes uploaded successfully");
+ }
 
 
   

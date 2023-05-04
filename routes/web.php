@@ -86,6 +86,10 @@ Route::prefix('/student')->middleware('auth','isStudent')->name('student.')->gro
     Route::post('/comment/{post}',[\App\Http\Controllers\StudentController::class,'comment'])->name('comment');
     Route::get('/note/{course}',[\App\Http\Controllers\StudentController::class,'note_index'])->name('note');
     Route::get('/assignment/{assignment}', [\App\Http\Controllers\Notification::class,'show'])->name('assignment.show');
+    Route::put('/notification/{id}/mark-as-read',[\App\Http\Controllers\Notification::class,'markAsRead'])->name('mark.notification.as.read');
+    Route::get('/notes/{note}',[\App\Http\Controllers\Notification::class,'showNote'])->name('note.show');
+    Route::get('/posts/{post}', [\App\Http\Controllers\Notification::class,'showPost'])->name('post.show');
+
 
 
 });
