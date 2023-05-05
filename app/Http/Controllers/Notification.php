@@ -9,6 +9,7 @@ use App\Models\Course;
 use App\Models\Comment;
 use App\Models\Assignment;
 use Illuminate\Http\Request;
+use App\Models\StudentAssignment;
 use Illuminate\Support\Facades\Auth;
 
 class Notification extends Controller
@@ -35,7 +36,12 @@ class Notification extends Controller
     }else if (isset($notification->data['post_id'])) {
         $postId = $notification->data['post_id'];
         $url = route('student.post.show', ['post' => $postId]);
-    } else {
+    }
+    else if (isset($notification->data['remark'])) {
+      $remarkId=$notification->data['remark'];
+        $url=route('student.remark.show', ['remark'=>$remarkId]);
+    }
+     else {
         return back();
     }
     return redirect($url);    
@@ -52,11 +58,21 @@ public function showNote($id)
 
 public function showPost($id)
 {
-
- 
     $post = Post::findOrFail($id);
     $course_id=$post->Course_id;
     $course=Course::where('id',$course_id)->first();
     return view('student.post.show', compact('post','course'));
+}
+
+
+public function showAssignment(StudentAssignment $id)
+{ 
+    
+return "hello";
+   
+    //dd($student_assignments);
+   // die();
+   // return view('tutor.student_assignment.show', compact('assignment','student_assignments','course','name','sem','faculty'));
+
 }
 }

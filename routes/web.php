@@ -69,7 +69,10 @@ Route::prefix('/tutor')->name('tutor.')->group(function(){
     Route::post('/note/create/{course}',[\App\Http\Controllers\TutorController::class,'store_note'])->name('note_store');
     Route::get('/post/create/{course}',[\App\Http\Controllers\PostController::class,'create_post'])->name('create_post');
     Route::post('/post/{course}',[\App\Http\Controllers\PostController::class,'upload_post'])->name('post_upload');
-    
+    Route::get('/submitted_assignment/{assignment}', [\App\Http\Controllers\Notification::class,'showAssignment'])->name('submitassignment.show');
+    Route::put('/notification/{id}/mark-as-read',[\App\Http\Controllers\TutorController::class,'markAsRead'])->name('mark.notification.as.read');
+    Route::get('/student-assignment/{id}', [\App\Http\Controllers\TutorController::class, 'show_student_assignment'])->name('studentassignment.show');
+
 });
 
 
@@ -89,6 +92,7 @@ Route::prefix('/student')->middleware('auth','isStudent')->name('student.')->gro
     Route::put('/notification/{id}/mark-as-read',[\App\Http\Controllers\Notification::class,'markAsRead'])->name('mark.notification.as.read');
     Route::get('/notes/{note}',[\App\Http\Controllers\Notification::class,'showNote'])->name('note.show');
     Route::get('/posts/{post}', [\App\Http\Controllers\Notification::class,'showPost'])->name('post.show');
+    Route::get('/remarks/{remark}',[\App\Http\Controllers\StudentController::class,'showRemarks'])->name('remark.show');
 
 
 

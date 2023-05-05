@@ -13,6 +13,7 @@ use App\Models\Assignment;
 
 use Illuminate\Http\Request;
 use App\Models\StudentAssignment;
+use App\Notifications\AssignmentRemark;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -82,19 +83,19 @@ $students = User::where('semester_id', $course->semester_id)
     return view('tutor.student_assignment', compact('assignment','student_assignments','course','name','sem','faculty'));
   }
 
-  //public function show_assignment(Assignment $assignment)
- // {
-    
- //  return view('tutor.show_assignment', compact('assignment'));
-  //}
+  
 public function remark(Request $request,StudentAssignment $assignment)          
 {
-  Remarks::create([
+  $remark=Remarks::create([
 'student_assignment_id'=>$assignment->id,
 'remark'=>$request->remarks,
   ]);
+  $student = $assignment->user;
+  Notification::send($student,new AssignmentRemark($remark));
   return redirect()->route('tutor.uploaded_assignment',[$assignment->assignment_id]);
 }
+
+
 
 
 
@@ -141,7 +142,43 @@ $course_name=$course->course;
  }
 
 
-  
+ public function markAsRead($id)
+{
+    $notification = auth()->user()->notifications()->findOrFail($id);
+    $notification->markAsRead();
+
+    
+  if (isset($notification->data['stdassignment_id'])) {
+        $stdassignment= $notification->data['stdassignment_id'];
+        $url = route('tutor.studentassignment.show', ['id' => $notification->data['stdassignment_id']]);
+    } else {
+        return back();
+    }
+    return redirect($url);    
+}
+
+
+public function show_student_assignment($id)
+{
+$stdassignment=StudentAssignment::where('id',$id)->first();
+$assignment=Assignment::where('id',$stdassignment->assignment_id)->first();
+$course_id=$assignment->course_id;
+    $course=Course::where('id',$course_id)->first();
+    $name=$course->course;
+
+    $semid = $course->semester_id;
+    $semester=Semester::where('id',$semid)->first();
+    $sem=$semester->sem;
+
+    $fid = $course->faculty_id;
+    $faculty=Faculty::where('id',$fid)->first();
+    $faculty=$faculty->name;
+return view('tutor.student_assignment.show',compact('assignment','stdassignment','course','name','sem','faculty'));
+
+
+
+   
+}
 
 }
 

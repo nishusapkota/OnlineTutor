@@ -125,7 +125,7 @@
                                         <a href="{{ $notification->data['url'] }}" class="dropdown-item"  onclick="event.preventDefault(); document.getElementById('mark-notification-as-read-form-{{ $notification->id }}').submit();">
                                             {{ $notification->data['message'] }}
                                         </a>
-                                        <form id="mark-notification-as-read-form-{{ $notification->id }}" action="{{ route('tutor.mark.notification.as.read', [$notification->id]) }}" method="POST" style="display: none;">
+                                        <form id="mark-notification-as-read-form-{{ $notification->id }}" action="{{ route('student.mark.notification.as.read', [$notification->id]) }}" method="POST" style="display: none;">
                                     @csrf
                                     @method('PUT')
                                 </form>
@@ -161,7 +161,7 @@
                   <thead>
                     <tr>
                       <th>Id</th>
-                      <th>Student Name</th>
+                      
                       <th>Submitted_At</th>
                       <th>Due_Date</th>
                       <th>Assignment</th>
@@ -169,10 +169,9 @@
                     </tr>
                   </thead>
                   <tbody>
-                    @foreach ($student_assignments as $student_assignment)
+                    
                     <tr>
                       <td>{{$student_assignment->id}}</td>
-                      <td>{{$student_assignment->user->name}}</td>
                       <td>{{$student_assignment->created_at}}</td>
                       <td>{{$student_assignment->assignment->due_date}}</td>
                       <td>
@@ -192,14 +191,10 @@
                         </a>
                       </td>
                       <td>
-                        <form action="{{route('tutor.remarks',[$assignment])}}" method="post">
-                          @csrf
-                          <input type="text" name="remarks" placeholder="Remarks here...." style="display: inline-block; width: 200px;">
-                          <button type="submit" class="btn btn-primary" tyle="display: inline-block;">Submit</button>
-                        </form>
+                        {{$remark->remark}}
                       </td>
                     </tr>
-                    @endforeach
+                    
 
                   </tbody>
 

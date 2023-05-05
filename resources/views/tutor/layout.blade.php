@@ -109,8 +109,31 @@
               
               <a href="{{route('tutor.create_post',$course)}}"><i class="fa fa-plus" aria-hidden="true"></i>Posts
               </a>
-              <a href=""><i class="fa fa-bell" aria-hidden="true"></i>
+              <a href="" class="dropdown-toogle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+                                    <i class="fa fa-bell" aria-hidden="true"></i>
+                                    <span class="badge badge-light" style="position: relative; left: -5px; background-color: red">
+                                        {{ auth()->user()->unreadNotifications()->count() }}
+                                    </span>
                                 </a>
+
+                                
+
+                                <ul class="dropdown-menu">
+                                    @forelse(auth()->user()->unreadNotifications as $notification)
+                                    <li>
+                                        <a href="{{ $notification->data['url'] }}" class="dropdown-item"  onclick="event.preventDefault(); document.getElementById('mark-notification-as-read-form-{{ $notification->id }}').submit();">
+                                            {{ $notification->data['message'] }}
+                                        </a>
+                                        <form id="mark-notification-as-read-form-{{ $notification->id }}" action="{{ route('tutor.mark.notification.as.read', [$notification->id]) }}" method="POST" style="display: none;">
+                                    @csrf
+                                    @method('PUT')
+                                </form>
+                                    </li>
+                                    @empty
+                                    <li class="dropdown-item">No Notification</li>
+                                    @endforelse
+                                </ul>
+
             </div>
           </div>
           </div>

@@ -7,10 +7,15 @@ use App\Models\Post;
 use App\Models\User;
 use App\Models\Course;
 use App\Models\Comment;
+use App\Models\Faculty;
+use App\Models\Remarks;
+use App\Models\Semester;
 use App\Models\Assignment;
 use Illuminate\Http\Request;
 use App\Models\StudentAssignment;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\AssignmentSubmitted;
+use Illuminate\Support\Facades\Notification;
 
 class StudentController extends Controller
 {
@@ -27,19 +32,26 @@ class StudentController extends Controller
     
     public function upload_assignment(Request $request,Assignment $assignment)
     {
-        $request->validate([
+       $request->validate([
             'file' => 'required|file|mimes:pdf,docx,txt',
         ]);
         $id=Auth::user()->id;
         $filename=time().".".$request->file('file')->getClientOriginalExtension();
         $path=$request->file('file')->move(public_path('student_assignment'), $filename);
       
-        StudentAssignment::create([
+       $studentAssignment=StudentAssignment::create([
             'assignment_id'=>$assignment->id,
             'student_assignment'=>$filename,
             'user_id'=>$id,
         ]);
-         return redirect()->back();
+
+$course_id=$assignment->course_id;
+$course=Course::where('id',$course_id)->first();
+$user_id=$course->user_id;
+$tutor=User::where('id',$user_id)->first();
+
+Notification::send($tutor, new AssignmentSubmitted($studentAssignment));
+       return redirect()->back();
     }
 
     public function post_index(Course $course)
@@ -88,4 +100,39 @@ class StudentController extends Controller
         
      return view('student.note',compact('course','semid','fid','notes'));  
     }
+    public function showAssignment(Assignment $id)
+    {
+        // Retrieve the assignment using the Assignment model
+        $assignment = Assignment::findOrFail($id);
+    
+        // Return a view that displays the assignment details
+        return view('student.assignment.show', [
+            'assignment' => $assignment
+        ]);
+    }
+
+    public function showRemarks($id)
+    {
+        $remark=Remarks::where('id',$id)->first();
+        $assignment=$remark->student_assignment->assignment;
+        $student_assignment=$remark->student_assignment;
+        
+        $course_id=$assignment->course_id;
+        $course=Course::where('id',$course_id)->first();
+        $name=$course->course;
+    
+        $semid = $course->semester_id;
+        $semester=Semester::where('id',$semid)->first();
+        $sem=$semester->sem;
+    
+        $fid = $course->faculty_id;
+        $faculty=Faculty::where('id',$fid)->first();
+        $faculty=$faculty->name;
+
+
+        
+        return view('student.remark',compact('name','student_assignment','remark','sem','faculty','course'));
+    }
+    
+
 }

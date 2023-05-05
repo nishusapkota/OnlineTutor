@@ -169,26 +169,26 @@
                     </tr>
                   </thead>
                   <tbody>
-                    @foreach ($student_assignments as $student_assignment)
+                   
                     <tr>
-                      <td>{{$student_assignment->id}}</td>
-                      <td>{{$student_assignment->user->name}}</td>
-                      <td>{{$student_assignment->created_at}}</td>
-                      <td>{{$student_assignment->assignment->due_date}}</td>
+                      <td>{{$stdassignment->id}}</td>
+                      <td>{{$stdassignment->user->name}}</td>
+                      <td>{{$stdassignment->created_at}}</td>
+                      <td>{{$stdassignment->assignment->due_date}}</td>
                       <td>
-                        <a href="{{ asset('student_assignment/'.$student_assignment->student_assignment) }}" target="_blank">
-                          @if(in_array(pathinfo($student_assignment->student_assignment, PATHINFO_EXTENSION), ['ppt', 'pptx']))
+                        <a href="{{ asset('student_assignment/'.$stdassignment->student_assignment) }}" target="_blank">
+                          @if(in_array(pathinfo($stdassignment->student_assignment, PATHINFO_EXTENSION), ['ppt', 'pptx']))
                           <i class="fas fa-file-powerpoint"></i>
-                          @elseif(in_array(pathinfo($student_assignment->student_assignment, PATHINFO_EXTENSION), ['doc', 'docx']))
+                          @elseif(in_array(pathinfo($stdassignment->student_assignment, PATHINFO_EXTENSION), ['doc', 'docx']))
                           <i class="fas fa-file-word"></i>
-                          @elseif(in_array(pathinfo($student_assignment->student_assignment, PATHINFO_EXTENSION), ['pdf']))
+                          @elseif(in_array(pathinfo($stdassignment->student_assignment, PATHINFO_EXTENSION), ['pdf']))
                           <i class="fas fa-file-pdf"></i>
-                          @elseif(in_array(pathinfo($student_assignment->student_assignment, PATHINFO_EXTENSION), ['xls', 'xlsx']))
+                          @elseif(in_array(pathinfo($stdassignment->student_assignment, PATHINFO_EXTENSION), ['xls', 'xlsx']))
                           <i class="fas fa-file-excel"></i>
-                          @elseif(in_array(pathinfo($student_assignment->student_assignment, PATHINFO_EXTENSION), ['txt']))
+                          @elseif(in_array(pathinfo($stdassignment->student_assignment, PATHINFO_EXTENSION), ['txt']))
                           <i class="fas fa-file-alt"></i>
                           @endif
-                          {{ $student_assignment->student_assignment }}
+                          {{ $stdassignment->student_assignment }}
                         </a>
                       </td>
                       <td>
@@ -199,7 +199,7 @@
                         </form>
                       </td>
                     </tr>
-                    @endforeach
+                   
 
                   </tbody>
 
